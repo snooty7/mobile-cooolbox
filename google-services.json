@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "381006592664",
+    "firebase_url": "https://snooty-23276.firebaseio.com",
+    "project_id": "snooty-23276",
+    "storage_bucket": "snooty-23276.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381006592664:android:4544a65156f4ae95",
+        "android_client_info": {
+          "package_name": "cooolbox.mobile.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381006592664-m1gs9r5q30uou0h6gucngbvkkk0j530i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKmYEoPhpM2nBnI2n2TFXsCih8kXeuD8Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

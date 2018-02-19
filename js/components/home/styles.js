@@ -38,7 +38,26 @@ export default {
 
     loginButton:{
         margin: 15,
-        marginTop: 45,
+        marginTop: 35,
         backgroundColor: '#0080b4'
+    },
+    forgotPass: {
+        margin: 15,
+        marginTop: 15,
+        fontSize: 18,
+        width: '50%',
+        flexDirection: 'row',
+        flexWrap: 'nowrap',
+        color: '#0080b4'
+    },
+    registration: {
+        marginTop: 15,
+        marginLeft: 15,
+        paddingLeft: 15,
+        fontSize: 18,
+        width: '50%',
+        flexWrap: 'nowrap',
+        flexDirection: 'row',
+        color: '#0080b4'
     }
 };

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
+import Anchor from './anchor';
 import {View} from "react-native";
 import {
     Container,
@@ -22,7 +23,6 @@ import {
 import styles from "./styles";
 import Api from '../../../Api';
 
-//let token = await Notifications.getExpoPushTokenAsync();
 class Login extends React.Component {
 
     constructor(props){
@@ -64,6 +64,16 @@ class Login extends React.Component {
                         <Input secureTextEntry={true} placeholder={I18n.t('password',{locale: 'bg'})} value={this.state.password} onChangeText = {(newValue) => this.setState({password:newValue})}/>
                     </Item>
                 </Form>
+                <View>
+                <Text style={{ margin: 15, alignSelf: 'center' }}>
+                    <Text>
+                    <Anchor style={styles.forgotPass} href="https://my.cooolbox.bg/index.php/step.lostpass">Забравена парола         </Anchor>
+                    </Text>
+                    <Text>
+                    <Anchor style={styles.registration} href="https://my.cooolbox.bg/index.php/step.register">      Регистрация</Anchor>
+                    </Text>
+                </Text>
+                </View>
                 <Button block style={styles.loginButton} onPress={() =>
 
                     /*this.login()*/

@@ -10,6 +10,7 @@
       "resizeMode": "contain"
     },
     "orientation": "portrait",
+    "icon": "./img/cooolbox-logo_post.png",
     "primaryColor": "#cccccc",
     "packagerOpts": {
       "assetExts": [

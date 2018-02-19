@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Image, View, StatusBar } from "react-native";
-
 import { Container} from "native-base";
 import Login from "./login";
 import styles from "./styles";

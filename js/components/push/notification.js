@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import { Permissions, Notifications } from 'expo';
+import * as firebase from 'firebase';
 import {View} from "react-native";
 import {
     Container,
@@ -32,6 +33,15 @@ class Notification extends React.Component {
         return null;
     }
 }
+    let config = {
+        apiKey: "AIzaSyBuPQX6o6IVEdqSdIcNK3ZqiH2j-xja-EQ",
+        authDomain: "snooty-23276.firebaseapp.com",
+        databaseURL: "https://snooty-23276.firebaseio.com/",
+        storageBucket: "gs://snooty-23276.appspot.com"
+    };
+    firebase.initializeApp(config);
+    // Get a reference to the database service
+    let fDatabase = firebase.database();
 
     registerForPushNotificationsAsync = async () =>{
     const { status: existingStatus } = await Permissions.getAsync(
@@ -52,10 +62,12 @@ class Notification extends React.Component {
     if (finalStatus !== 'granted') {
         return;
     }
-
     // Get the token that uniquely identifies this device
     let token = await Notifications.getExpoPushTokenAsync();
     console.log("KKKKKKKKK" + token);
+        fDatabase.ref('users/' + 'phone').set({
+            highscore: token
+        });
 
 }
 

@@ -9,11 +9,12 @@ import {
 import { View, Image} from "react-native";
 
 import {Grid, Row, Col} from "react-native-easy-grid";
+import I18n from "../../../i18n/i18n";
 
 
-class Statistics extends React.Component {
+class Settings extends React.Component {
     static navigationOptions = {
-        tabBarLabel: 'Settings'
+        tabBarLabel: I18n.t('settings', {locale: 'bg'})
     
     };
 
@@ -27,4 +28,4 @@ class Statistics extends React.Component {
 }
 
 
-export default Statistics;
+export default Settings;

@@ -18,13 +18,15 @@ import ScaledImage from "../../../common/scaledimage";
 import styles from './styles';
 
 import {Grid, Row, Col} from "react-native-easy-grid";
+import I18n from "../../../i18n/i18n";
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
+
 class Profile extends React.Component {
 
 
     static navigationOptions = {
-        tabBarLabel: 'Profile'
+        tabBarLabel: I18n.t('profile', {locale: 'bg'})
     };
 
 

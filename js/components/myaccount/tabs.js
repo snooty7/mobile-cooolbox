@@ -10,8 +10,8 @@ import {
 import { View, Image} from "react-native";
 
 import Profile from './profile';
-import Statistics from './statistics';
-
+import Statistics from './settings';
+import Notifications from './notifications';
 import {Grid, Row, Col} from "react-native-easy-grid";
 
 const avatar = require("../../../img/profile-login.png");
@@ -25,17 +25,21 @@ const Tabs = TabNavigator({
     Settings: {
         screen: Statistics,
     },
+    Notifications: {
+        screen: Notifications,
+    },
 },
     {
     tabBarPosition: 'top',
     tabBarOptions: {
+        showIcon: true,
         activeTintColor: 'white',
         style: {
             backgroundColor: '#BFCD31',
         },
         indicatorStyle: {
             backgroundColor: '#BFCD31'
-        }
+        },
     }
 
 });

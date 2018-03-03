@@ -27,6 +27,7 @@
     "frisbee": "^1.6.4",
     "lodash": "4.13.1",
     "moment": "2.13.0",
+    "mysql": "^2.15.0",
     "native-base": "2.3.1",
     "react": "16.0.0",
     "react-autobind": "^1.0.6",

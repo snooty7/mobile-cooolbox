@@ -102,7 +102,7 @@ class Users extends Component {
                             </Button>
                         </Left>
                         <Body>
-                        <Title>{I18n.t('users')}</Title>
+                        <Title>{I18n.t('access', {locale: 'bg'})}</Title>
                         </Body>
                         <Right/>
 

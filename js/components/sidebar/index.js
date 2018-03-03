@@ -26,14 +26,19 @@ const drawerImage = require("../../../img/cooolbox-logo.png");
 
 const datas = [
     {
-        name: I18n.t('myAccount'),
+        name: I18n.t('myAccount',{locale: 'bg'}),
         route: "MyAccount",
         icon: "ios-person"
     },
     {
-        name: I18n.t('users'),
+        name: I18n.t('access',{locale: 'bg'}),
         route: "Users",
         icon: "ios-people"
+    },
+    {
+        name: I18n.t('Payments',{locale: 'bg'}),
+        route: "Payments",
+        icon: "ios-cash"
     }
 ];
 

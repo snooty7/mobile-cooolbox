@@ -39,6 +39,21 @@ const datas = [
         name: I18n.t('Payments',{locale: 'bg'}),
         route: "Payments",
         icon: "ios-cash"
+    },
+    {
+        name: I18n.t('additional',{locale: 'bg'}),
+        route: "Additional",
+        icon: "ios-contract"
+    },
+    {
+        name: I18n.t('networkSettings',{locale: 'bg'}),
+        route: "NetworkSettings",
+        icon: "ios-navigate"
+    },
+    {
+        name: I18n.t('phoneCalls',{locale: 'bg'}),
+        route: "PhoneCalls",
+        icon: "ios-phone-portrait"
     }
 ];
 

@@ -8,7 +8,7 @@ export default {
     settings: 'Профилни настройки',
     access: 'Достъп',
     Payments: 'Плащане и фактури',
-    additionall: 'Допълнителни услуги',
+    additional: 'Допълнителни услуги',
     phoneCalls: 'Телефонни разговори',
     networkSettings: 'Мрежови настройки',
     notifications: 'Известия'

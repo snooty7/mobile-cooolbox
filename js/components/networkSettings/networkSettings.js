@@ -24,7 +24,7 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 
 import styles from "./styles";
 
-class Payments extends Component {
+class NetworkSettings extends Component {
 
     render() {
         return (
@@ -40,7 +40,7 @@ class Payments extends Component {
                         </Button>
                     </Left>
                     <Body>
-                    <Title>{I18n.t('Payments', {locale: 'bg'})}</Title>
+                    <Title>{I18n.t('networkSettings', {locale: 'bg'})}</Title>
                     </Body>
                     <Right/>
 
@@ -52,4 +52,4 @@ class Payments extends Component {
     }
 }
 
-export default Payments;
+export default NetworkSettings;

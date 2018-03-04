@@ -7,7 +7,7 @@ export default {
     settings: 'Settings',
     access: 'Access',
     Payments: 'payments',
-    additionall: 'Additionall services',
+    additional: 'Additional services',
     phoneCalls: 'Phone Calls',
     networkSettings: 'Network Settings',
     notifications: 'Notifications'

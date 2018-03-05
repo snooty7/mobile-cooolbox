@@ -37,45 +37,38 @@ class Profile extends React.Component {
 
             <Card>
                 <CardItem header>
-                    <Text>Profile Screen</Text>
+                    <Text>Клиент</Text>
                 </CardItem>
                 <CardItem>
                         <Grid>
                             <Row>
-                                <Col>
-                                    <Content padder>
-                                        <Text>Profile Screen</Text>
-                                    </Content>
+                                <View>
+                                    <Text style={styles.listLabel}>Име:</Text>
+                                    <Text style={styles.name}>Иван Петров</Text>
+                                </View>
+                            </Row>
+                            <Row style={styles.profileList}>
+                                <Col size={1}>
+                                    <Text style={styles.listLabel}>Клиентски номер:</Text>
                                 </Col>
-                                <Col>
-                                    <View style={styles.infoContainer}>
-                                        <Text style={styles.listLabel}>Name:</Text>
-                                        <Text style={styles.name}>Ivan Petrov</Text>
-                                    </View>
+                                <Col size={2}>
+                                    <Text style={styles.listValue}>1028424</Text>
                                 </Col>
                             </Row>
                             <Row style={styles.profileList}>
                                 <Col size={1}>
-                                    <Text style={styles.listLabel}>email:</Text>
+                                    <Text style={styles.listLabel}>Услуга:</Text>
                                 </Col>
                                 <Col size={2}>
-                                    <Text style={styles.listValue}>ivan.petrov@abv.bg</Text>
+                                    <Text style={styles.listValue}>CooolHome</Text>
                                 </Col>
                             </Row>
                             <Row style={styles.profileList}>
                                 <Col size={1}>
-                                    <Text style={styles.listLabel}>skype:</Text>
+                                    <Text style={styles.listLabel}>Адрес:</Text>
                                 </Col>
                                 <Col size={2}>
-                                    <Text style={styles.listValue}>ivanpetrovbg</Text>
-                                </Col>
-                            </Row>
-                            <Row style={styles.profileList}>
-                                <Col size={1}>
-                                    <Text style={styles.listLabel}>phone:</Text>
-                                </Col>
-                                <Col size={2}>
-                                    <Text style={styles.listValue}>0884 221 213</Text>
+                                    <Text style={styles.listValue}>ул. Пейо Тодоров № 7</Text>
                                 </Col>
                             </Row>
                         </Grid>

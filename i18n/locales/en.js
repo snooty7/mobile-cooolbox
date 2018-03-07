@@ -1,6 +1,6 @@
 export default {
-    username: 'Username',
-    password: 'Password',
+    email: 'Email',
+    pass: 'Password',
     login: 'Log in',
     myAccount: 'My Account',
     users: 'Users',

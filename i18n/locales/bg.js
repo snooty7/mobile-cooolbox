@@ -1,6 +1,6 @@
 export default {
-    username: 'Потребител',
-    password: 'Парола',
+    email: 'Email',
+    pass: 'Парола',
     login: 'Вход',
     myAccount: 'Моят профил',
     users: 'Потребители',

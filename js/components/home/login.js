@@ -28,20 +28,20 @@ class Login extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            username:'',
-            password:''
+            email:'',
+            pass:''
         }
     }
 
 
     login = () => {
         let loginData = {
-            username: this.state.username,
-            password: this.state.password,
+            email: this.state.email,
+            pass: this.state.pass,
         }
 
         Api.post({
-            url:'login',
+            url:'http://localhost:3000/average',
             data: loginData,
             success: this.loginSuccess
         })
@@ -58,10 +58,10 @@ class Login extends React.Component {
             <View>
                 <Form>
                     <Item style={styles.inputContainer}>
-                        <Input placeholder={I18n.t('username', {locale: 'bg'})} value={this.state.username} onChangeText = {(newValue) => this.setState({username:newValue})}/>
+                        <Input placeholder={I18n.t('email', {locale: 'bg'})} value={this.state.email} onChangeText = {(newValue) => this.setState({email:newValue})}/>
                     </Item>
                     <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('password',{locale: 'bg'})} value={this.state.password} onChangeText = {(newValue) => this.setState({password:newValue})}/>
+                        <Input secureTextEntry={true} placeholder={I18n.t('pass',{locale: 'bg'})} value={this.state.pass} onChangeText = {(newValue) => this.setState({pass:newValue})}/>
                     </Item>
                 </Form>
                 <View>
@@ -76,8 +76,8 @@ class Login extends React.Component {
                 </View>
                 <Button block style={styles.loginButton} onPress={() =>
 
-                    /*this.login()*/
-                     this.props.navigation.navigate("MyAccount")
+                    this.login()
+                    // this.props.navigation.navigate("MyAccount")
 
                 }>
                     <Text>{I18n.t('login',{locale: 'bg'}).toUpperCase()}</Text>

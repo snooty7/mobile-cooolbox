@@ -41,7 +41,7 @@ class Login extends React.Component {
         }
 
         Api.post({
-            url:'http://localhost:3000/average',
+            url:'login',
             data: loginData,
             success: this.loginSuccess
         })
@@ -77,7 +77,7 @@ class Login extends React.Component {
                 <Button block style={styles.loginButton} onPress={() =>
 
                     this.login()
-                    // this.props.navigation.navigate("MyAccount")
+                    //this.props.navigation.navigate("MyAccount")
 
                 }>
                     <Text>{I18n.t('login',{locale: 'bg'}).toUpperCase()}</Text>

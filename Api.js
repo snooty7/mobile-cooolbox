@@ -2,6 +2,7 @@ import {Toast} from "native-base";
 import I18n from './i18n/i18n';
 import fetch from 'react-native-fetch-polyfill';
 
+let baseUrl = 'http://192.168.0.103:3000/';
 let Api = {
     get: (options = {}) => {
         Api.executeRequest(options, 'GET')
@@ -26,11 +27,18 @@ let Api = {
             url = url + '?' + Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
         }
         console.log(options, type)
+        url = baseUrl + url
         return fetch(url, _data)
             .then((response) => response.json())
             .then((responseJson) => {
                 if(options.success){
                     options.success(responseJson)
+                }
+                if (responseJson.status == 'error'){
+                    Toast.show({
+                        text: responseJson.message,
+                        buttonText: I18n.t('ok')
+                    })
                 }
                 console.log(responseJson)
             })
@@ -47,19 +55,22 @@ let Api = {
     prepareData: (data, type) => {
         let requestData = {
             method: type,
-            // headers: {
-            //     'Accept': 'application/json',
-            //     'content-type': 'application/json',
+             headers: {
+                 'Accept': 'application/json',
+                 'content-type': 'application/json',
             //     'Access-Control-Allow-Origin':'*'
-            // }
+            }
             // nachin da dobavim v headers kym requesta
         }
         if(type == 'POST') {
-            requestData.body = data
+            requestData.body=
+            JSON.stringify({
+                data
+            })
         }
 
         console.log(requestData)
-
+        console.log(data)
         return requestData;
     }
 

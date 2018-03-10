@@ -39,7 +39,7 @@ class Additional extends Component {
                             <Icon name="ios-menu"/>
                         </Button>
                     </Left>
-                    <Body>
+                    <Body style={{flex: 3}}>
                     <Title>{I18n.t('additional', {locale: 'bg'})}</Title>
                     </Body>
                     <Right/>

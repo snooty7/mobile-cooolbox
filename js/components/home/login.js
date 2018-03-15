@@ -33,7 +33,6 @@ class Login extends React.Component {
         }
     }
 
-
     login = () => {
         let loginData = {
             email: this.state.email,
@@ -49,7 +48,7 @@ class Login extends React.Component {
     };
 
     loginSuccess = (response) => {
-        console.log(response)
+        if (response.status != 'error')
         this.props.navigation.navigate("MyAccount")
     };
 
@@ -78,7 +77,6 @@ class Login extends React.Component {
 
                     this.login()
                     //this.props.navigation.navigate("MyAccount")
-
                 }>
                     <Text>{I18n.t('login',{locale: 'bg'}).toUpperCase()}</Text>
                 </Button>

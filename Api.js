@@ -2,7 +2,7 @@ import {Toast} from "native-base";
 import I18n from './i18n/i18n';
 import fetch from 'react-native-fetch-polyfill';
 
-let baseUrl = 'http://192.168.0.103:3000/';
+let baseUrl = 'http://192.168.0.110:3000/';
 let Api = {
     get: (options = {}) => {
         Api.executeRequest(options, 'GET')
@@ -37,7 +37,7 @@ let Api = {
                 if (responseJson.status == 'error'){
                     Toast.show({
                         text: responseJson.message,
-                        buttonText: I18n.t('ok')
+                        buttonText: I18n.t('errorLoging')
                     })
                 }
                 console.log(responseJson)

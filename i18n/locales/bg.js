@@ -11,6 +11,7 @@ export default {
     additional: 'Допълнителни услуги',
     phoneCalls: 'Телефонни разговори',
     networkSettings: 'Мрежови настройки',
-    notifications: 'Известия'
+    notifications: 'Известия',
+    errorLoging: 'Грешен имейл или парола!!!'
 
 };

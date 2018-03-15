@@ -13,11 +13,11 @@ class CategoryItem extends Component {
         return (
         <ListItem>
             <Body>
-             <Text>{this.props.title}</Text>
+             <Text>Access</Text>
 
             </Body>
             <Right>
-                <Text note>{this.props.releaseYear}</Text>
+                <Text note>Access</Text>
             </Right>
 
         </ListItem>

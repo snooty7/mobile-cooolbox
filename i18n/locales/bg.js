@@ -12,6 +12,7 @@ export default {
     phoneCalls: 'Телефонни разговори',
     networkSettings: 'Мрежови настройки',
     notifications: 'Известия',
+    tv: 'Телевизия',
     errorLoging: 'Грешен имейл или парола!!!'
 
 };

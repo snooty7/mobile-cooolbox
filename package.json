@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^6.2.1",
+    "@expo/videoplayer": "^0.4.0",
     "color": "1.0.3",
     "ex-react-native-i18n": "0.0.3",
     "expo": "23.0.0",

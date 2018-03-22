@@ -53,13 +53,6 @@ class Profile extends React.Component {
         })
     }
 
-    onRefresh = () => {
-        this.setState({
-            refreshing: true
-        })
-        this.loadData();
-    }
-
     loadData = () => {
         console.log('loadDataProfile')
         Api.post({
@@ -74,12 +67,6 @@ class Profile extends React.Component {
 
     render() {
         return (
-            <ScrollView refreshControl={
-                <RefreshControl
-                    refreshing={this.state.refreshing}
-                    onRefresh={this.onRefresh}
-                />
-            }>
                 <Content padder>
 
                     <Card>
@@ -91,7 +78,7 @@ class Profile extends React.Component {
                                     <Row>
                                         <View>
                                             <Text style={styles.listLabel}>Име:</Text>
-                                            <Text style={styles.name}>{this.props.name}</Text>
+                                            <Text style={styles.name}>{this.state.name}</Text>
                                         </View>
                                     </Row>
                                     <Row style={styles.profileList}>
@@ -99,7 +86,7 @@ class Profile extends React.Component {
                                             <Text style={styles.listLabel}>Клиентски номер:</Text>
                                         </Col>
                                         <Col size={2}>
-                                            <Text style={styles.listValue}>1028424</Text>
+                                            <Text style={styles.listValue}>{this.state.clientNumber}</Text>
                                         </Col>
                                     </Row>
                                     <Row style={styles.profileList}>
@@ -107,7 +94,7 @@ class Profile extends React.Component {
                                             <Text style={styles.listLabel}>Услуга:</Text>
                                         </Col>
                                         <Col size={2}>
-                                            <Text style={styles.listValue}>CooolHome</Text>
+                                            <Text style={styles.listValue}>{this.state.service}</Text>
                                         </Col>
                                     </Row>
                                     <Row style={styles.profileList}>
@@ -115,7 +102,7 @@ class Profile extends React.Component {
                                             <Text style={styles.listLabel}>Адрес:</Text>
                                         </Col>
                                         <Col size={2}>
-                                            <Text style={styles.listValue}>ул. Пейо Тодоров № 7</Text>
+                                            <Text style={styles.listValue}>{this.state.address}</Text>
                                         </Col>
                                     </Row>
                                 </Grid>
@@ -124,8 +111,6 @@ class Profile extends React.Component {
                     </Card>
 
                 </Content>
-
-            </ScrollView>
         )
     }
 }

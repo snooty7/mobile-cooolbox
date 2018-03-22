@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {RefreshControl, ScrollView} from "react-native";
 import I18n from '../../../i18n/i18n';
 import Api from '../../../Api';
-import CategoryItem from './categoryitem';
 import {
     Container,
     Header,

@@ -7,6 +7,7 @@ import Payments from "./components/payments/payments";
 import Additional from "./components/additional/additional";
 import NetworkSettings from "./components/networkSettings/networkSettings";
 import PhoneCalls from "./components/phoneCalls/phoneCalls";
+import Tv from "./components/tv/index";
 import SideBar from "./components/sidebar";
 
 
@@ -17,7 +18,8 @@ const Drawer = DrawerNavigator(
         Payments: {screen: Payments},
         Additional: {screen: Additional},
         NetworkSettings: {screen: NetworkSettings},
-        PhoneCalls: {screen: PhoneCalls}
+        PhoneCalls: {screen: PhoneCalls},
+        Tv: {screen: Tv}
 
     },
     {

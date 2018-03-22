@@ -54,6 +54,11 @@ const datas = [
         name: I18n.t('phoneCalls',{locale: 'bg'}),
         route: "PhoneCalls",
         icon: "ios-phone-portrait"
+    },
+    {
+        name: I18n.t('tv',{locale: 'bg'}),
+        route: "Tv",
+        icon: "ios-easel"
     }
 ];
 

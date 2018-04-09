@@ -60,7 +60,7 @@ class Tv extends Component {
                         <TouchableHighlight onPress={this.onPressButton}>
                             <Text style={{color: 'yellow'}}>Full Screen</Text>
                         </TouchableHighlight>
-                        <VideoPlayer
+                       /* <VideoPlayer
                             videoProps={{
                                 shouldPlay: true,
                                 resizeMode: Video.RESIZE_MODE_CONTAIN,
@@ -70,7 +70,7 @@ class Tv extends Component {
                             }}
                             isPortrait={true}
                             playFromPositionMillis={0}
-                        />
+                        />*/
                     </View>
 
                 </Container>

@@ -1,7 +1,10 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import Anchor from './anchor';
-import {View} from "react-native";
+import {View, TouchableHighlight} from "react-native";
+import forgotPass from "./forgotPass";
+import registration from "./registration";
+
 import {
     Container,
     Header,
@@ -52,6 +55,13 @@ class Login extends React.Component {
         this.props.navigation.navigate("MyAccount")
     };
 
+    _handlePressPass = () => {
+        this.props.navigation.navigate("forgotPass")
+    }
+    _handlePressReg = () => {
+        this.props.navigation.navigate("Registration")
+    };
+
     render() {
         return (
             <View>
@@ -63,15 +73,14 @@ class Login extends React.Component {
                         <Input secureTextEntry={true} placeholder={I18n.t('pass',{locale: 'bg'})} value={this.state.pass} onChangeText = {(newValue) => this.setState({pass:newValue})}/>
                     </Item>
                 </Form>
+
                 <View>
-                <Text style={{ margin: 15, alignSelf: 'center' }}>
-                    <Text>
-                    <Anchor style={styles.forgotPass} href="https://my.cooolbox.bg/index.php/step.lostpass">Забравена парола         </Anchor>
-                    </Text>
-                    <Text>
-                    <Anchor style={styles.registration} href="https://my.cooolbox.bg/index.php/step.register">      Регистрация</Anchor>
-                    </Text>
-                </Text>
+                    <TouchableHighlight onPress={this._handlePressPass}>
+                        <Text style={styles.forgotPass}> Забравена парола </Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight onPress={this._handlePressReg}>
+                        <Text style={styles.registration}> Регистрация </Text>
+                    </TouchableHighlight>
                 </View>
                 <Button block style={styles.loginButton} onPress={() =>
 

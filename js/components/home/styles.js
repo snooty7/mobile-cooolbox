@@ -44,8 +44,8 @@ export default {
     forgotPass: {
         margin: 15,
         marginTop: 15,
-        fontSize: 18,
-        width: '50%',
+        size: 28,
+        width: '100%',
         flexDirection: 'row',
         flexWrap: 'nowrap',
         color: '#0080b4'
@@ -54,10 +54,12 @@ export default {
         marginTop: 15,
         marginLeft: 15,
         paddingLeft: 15,
-        fontSize: 18,
-        width: '50%',
+        width: '100%',
         flexWrap: 'nowrap',
         flexDirection: 'row',
         color: '#0080b4'
+    },
+    button: {
+        flexDirection:'column'
     }
 };

@@ -7,6 +7,8 @@ import Payments from "./components/payments/payments";
 import Additional from "./components/additional/additional";
 import NetworkSettings from "./components/networkSettings/networkSettings";
 import PhoneCalls from "./components/phoneCalls/phoneCalls";
+import ForgotPass from "./components/home/forgotPass";
+import Registration from "./components/home/registration";
 import Tv from "./components/tv/index";
 import SideBar from "./components/sidebar";
 
@@ -19,8 +21,9 @@ const Drawer = DrawerNavigator(
         Additional: {screen: Additional},
         NetworkSettings: {screen: NetworkSettings},
         PhoneCalls: {screen: PhoneCalls},
-        Tv: {screen: Tv}
-
+        Tv: {screen: Tv},
+        forgotPass: {screen: ForgotPass},
+        registration: {screen: Registration}
     },
     {
         initialRouteName: "MyAccount",

@@ -1,6 +1,7 @@
 import { TabNavigator } from 'react-navigation';
-import {RefreshControl, ScrollView} from "react-native";
+import {Alert, BackHandler, RefreshControl, ScrollView} from "react-native";
 import React, {Component} from "react";
+import ModalOnExit from "./../../modalOnExit";
 import {
     Text,
     Content,
@@ -28,18 +29,40 @@ class Profile extends React.Component {
 
     constructor(props){
         super(props)
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
         this.state = {
             name:'',
             clientNumber:'',
             service:'',
             address:'',
-            refreshing:false
+            refreshing:false,
         }
         console.log('constructor')
     }
 
     componentDidMount () {
         this.loadData()
+    }
+
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+
+    handleBackButtonClick = () => {
+        Alert.alert(
+            'Alert Title',
+            'My Alert Msg',
+            [
+                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'OK', onPress: () => BackHandler.exitApp()},
+            ],
+            {cancelable: false}
+        )
+        return true;
     }
 
     changeState = (json) => {
@@ -109,7 +132,6 @@ class Profile extends React.Component {
                         </CardItem>
 
                     </Card>
-
                 </Content>
         )
     }

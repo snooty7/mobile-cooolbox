@@ -1,7 +1,6 @@
 import { TabNavigator } from 'react-navigation';
 import {Alert, BackHandler, RefreshControl, ScrollView} from "react-native";
 import React, {Component} from "react";
-import ModalOnExit from "./../../modalOnExit";
 import {
     Text,
     Content,
@@ -54,8 +53,8 @@ class Profile extends React.Component {
 
     handleBackButtonClick = () => {
         Alert.alert(
-            'Alert Title',
-            'My Alert Msg',
+            'Exiting application',
+            'Are you sure?',
             [
                 {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                 {text: 'OK', onPress: () => BackHandler.exitApp()},

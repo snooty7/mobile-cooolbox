@@ -23,24 +23,6 @@ import {
 
 class ForgotPass extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-    }
-
-    componentWillMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-    }
-
-    handleBackButtonClick() {
-        this.props.navigation.goBack(null);
-        return false;
-    }
-
     render() {
         return (
             <WebView

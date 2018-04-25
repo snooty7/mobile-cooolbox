@@ -10,8 +10,7 @@ export default {
     },
     imageContainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        flexDirection: 'row'
     },
 
     inputContainer: {
@@ -28,7 +27,7 @@ export default {
     formContainer: {
         flex: 1,
         margin: 15,
-        marginTop: deviceHeight / 8,
+        marginTop: deviceHeight / 4,
         marginBottom: 30
     },
     logo: {
@@ -43,17 +42,16 @@ export default {
     },
     forgotPass: {
         margin: 15,
-        marginTop: 15,
-        size: 28,
         width: '100%',
         flexDirection: 'row',
         flexWrap: 'nowrap',
         color: '#0080b4'
     },
     registration: {
-        marginTop: 15,
-        marginLeft: 15,
-        paddingLeft: 15,
+        margin: 15,
+        paddingLeft: 60,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         width: '100%',
         flexWrap: 'nowrap',
         flexDirection: 'row',

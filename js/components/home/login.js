@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import Anchor from './anchor';
-import {View, TouchableHighlight} from "react-native";
-import forgotPass from "./forgotPass";
-import registration from "./registration";
-
+import {View, TouchableHighlight, Modal} from "react-native";
+import ForgotPass from "./forgotPass";
+import Registration from "./registration";
+import Notification from "../../components/push/notification";
+import {Grid, Row, Col} from "react-native-easy-grid";
 import {
     Container,
     Header,
@@ -32,7 +33,9 @@ class Login extends React.Component {
         super(props);
         this.state={
             email:'',
-            pass:''
+            pass:'',
+            modalVisible: false,
+            renderPass: false
         }
     }
 
@@ -52,15 +55,31 @@ class Login extends React.Component {
 
     loginSuccess = (response) => {
         if (response.status != 'error')
-        this.props.navigation.navigate("MyAccount")
+
+            Notification.sendToken(()=> this.props.navigation.navigate("MyAccount"));
+
     };
 
     _handlePressPass = () => {
-        this.props.navigation.navigate("forgotPass")
+
+        this.setState({
+            modalVisible: true,
+            renderPass: true
+        })
     }
     _handlePressReg = () => {
-        this.props.navigation.navigate("Registration")
+        this.setState({
+            modalVisible: true,
+            renderPass: false
+        })
     };
+
+    getModalContent = () => {
+        if(!this.state.renderPass){
+            return <Registration/>
+        }
+        return <ForgotPass/>
+    }
 
     render() {
         return (
@@ -74,14 +93,21 @@ class Login extends React.Component {
                     </Item>
                 </Form>
 
-                <View>
-                    <TouchableHighlight onPress={this._handlePressPass}>
-                        <Text style={styles.forgotPass}> Забравена парола </Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={this._handlePressReg}>
-                        <Text style={styles.registration}> Регистрация </Text>
-                    </TouchableHighlight>
-                </View>
+                <Grid>
+                    <Row>
+                        <Col>
+                            <Button onPress={this._handlePressPass}>
+                                <Text style={styles.forgotPass}> Забравена парола </Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button onPress={this._handlePressReg}>
+                                <Text style={styles.registration}>   Регистрация </Text>
+                            </Button>
+                        </Col>
+                    </Row>
+
+                </Grid>
                 <Button block style={styles.loginButton} onPress={() =>
 
                     this.login()
@@ -89,6 +115,16 @@ class Login extends React.Component {
                 }>
                     <Text>{I18n.t('login',{locale: 'bg'}).toUpperCase()}</Text>
                 </Button>
+                <Modal animationType="slide"
+                       visible={this.state.modalVisible}
+                       onRequestClose={()=>{
+                           this.setState({
+                               modalVisible:false
+                           })
+                       }}
+                >
+                {this.getModalContent()}
+                </Modal>
             </View>
         );
     }

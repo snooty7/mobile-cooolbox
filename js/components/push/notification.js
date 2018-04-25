@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import I18n from '../../../i18n/i18n';
 import { Permissions, Notifications } from 'expo';
-import * as firebase from 'firebase';
 import {View} from "react-native";
 import {
     Container,
@@ -24,7 +23,26 @@ import {
 import styles from "./styles";
 import Api from '../../../Api';
 
+let token = '';
+
 class Notification extends React.Component {
+
+    constructor(props){
+        super(props);
+    }
+
+    static sendToken = (callback) => {
+        let loginToken = {
+            token
+        }
+
+        Api.post({
+            url: 'push',
+            data: loginToken,
+            success: callback(),
+            error: callback()
+        })
+    };
 
     componentDidMount() {
         registerForPushNotificationsAsync();
@@ -33,16 +51,6 @@ class Notification extends React.Component {
         return null;
     }
 }
-    let config = {
-        apiKey: "AIzaSyBuPQX6o6IVEdqSdIcNK3ZqiH2j-xja-EQ",
-        authDomain: "snooty-23276.firebaseapp.com",
-        databaseURL: "https://snooty-23276.firebaseio.com/",
-        storageBucket: "gs://snooty-23276.appspot.com"
-    };
-    firebase.initializeApp(config);
-    // Get a reference to the database service
-    let fDatabase = firebase.database();
-
     registerForPushNotificationsAsync = async () =>{
     const { status: existingStatus } = await Permissions.getAsync(
         Permissions.NOTIFICATIONS
@@ -63,11 +71,7 @@ class Notification extends React.Component {
         return;
     }
     // Get the token that uniquely identifies this device
-    let token = await Notifications.getExpoPushTokenAsync();
-    console.log("KKKKKKKKK" + token);
-        fDatabase.ref('users/' + 'phone').set({
-            highscore: token
-        });
+     token = await Notifications.getExpoPushTokenAsync();
 
 }
 

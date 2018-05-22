@@ -25,5 +25,14 @@ export default {
     listValue: {
         alignSelf: 'stretch',
         textAlign: 'right'
+    },
+    emailButton: {
+        color: '#bfcd31',
+        margin: 15,
+        fontSize: 20
+    },
+    texts: {
+        fontSize: 20,
+        margin: 15
     }
 };

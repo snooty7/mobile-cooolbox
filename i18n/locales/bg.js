@@ -1,6 +1,10 @@
 export default {
     email: 'Email',
+    newEmail: 'нов Email',
     pass: 'Парола',
+    newPass: 'Нова парола',
+    verifyPass: 'Потвърди новата парола',
+    change: 'Промени',
     login: 'Вход',
     myAccount: 'Моят профил',
     users: 'Потребители',

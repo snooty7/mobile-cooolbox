@@ -53,8 +53,8 @@ class Profile extends React.Component {
 
     handleBackButtonClick = () => {
         Alert.alert(
-            'Exiting application',
-            'Are you sure?',
+            'Излизане от приложението',
+            'Сигурни ли сте, че искате да излезете от приложението?',
             [
                 {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                 {text: 'OK', onPress: () => BackHandler.exitApp()},

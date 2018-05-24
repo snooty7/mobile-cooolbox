@@ -17,6 +17,7 @@ export default {
     networkSettings: 'Мрежови настройки',
     notifications: 'Известия',
     tv: 'Телевизия',
-    errorLoging: 'Грешен имейл или парола!!!'
+    errorLoging: 'Грешен имейл или парола!!!',
+    add: 'Добави Банкова Карта'
 
 };

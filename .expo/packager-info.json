@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://ur-tzi.snooty7.reactnativemaster.exp.direct",
-  "packagerNgrokUrl": "https://packager.ur-tzi.snooty7.reactnativemaster.exp.direct",
-  "ngrokPid": 8536,
-  "packagerPort": 19001,
-  "packagerPid": 892
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "packagerPort": null,
+  "packagerPid": null
 }

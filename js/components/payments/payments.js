@@ -20,6 +20,7 @@ import {
     List,
     CardItem
 } from "native-base";
+import { View } from "react-native";
 import {Grid, Row, Col} from "react-native-easy-grid";
 
 import styles from "./styles";
@@ -45,7 +46,51 @@ class Payments extends Component {
                     <Right/>
 
                 </Header>
+                <Content padder>
+                    <Card>
+                        <CardItem header>
+                            <Text>Фактури и плащания</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Grid>
+                                <Row>
+                                    <View>
+                                        <Text>Фактура № </Text>
+                                    </View>
+                                </Row>
+                                <Row>
+                                    <View>
+                                        <Button block style={styles.emailButton} onPress={() =>
+                                            this.changePass()
+                                        }>
+                                            <Text>Плати</Text>
+                                        </Button>
+                                    </View>
+                                </Row>
 
+                            </Grid>
+                        </CardItem>
+                        <CardItem>
+                            <Grid>
+                                <Row>
+                                    <View>
+                                        <Text style={styles.texts_e}>Регистрирани банкови карти</Text>
+                                    </View>
+                                </Row>
+                                <Row>
+                                    <View>
+                                        <Text style={styles.texts_e}>Няма регистрирани банкови карти</Text>
+                                        <Button block style={styles.emailButton} onPress={() =>
+                                            this.changePass()
+                                        }>
+                                            <Text>{I18n.t('add',{locale: 'bg'}).toUpperCase()}</Text>
+                                        </Button>
+                                    </View>
+                                </Row>
+                            </Grid>
+                        </CardItem>
+                    </Card>
+                </Content>
             </Container>
 
         );

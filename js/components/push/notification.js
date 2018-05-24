@@ -25,7 +25,7 @@ import Api from '../../../Api';
 
 let token = '';
 
-class Notification extends React.Component {
+class PushNotification extends React.Component {
 
     constructor(props){
         super(props);
@@ -75,4 +75,4 @@ class Notification extends React.Component {
 
 }
 
-export default Notification;
+export default PushNotification;

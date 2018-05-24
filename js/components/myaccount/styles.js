@@ -31,7 +31,7 @@ export default {
         margin: 15,
         fontSize: 20
     },
-    texts: {
+    texts_e: {
         fontSize: 20,
         margin: 15
     }

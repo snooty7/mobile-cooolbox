@@ -3,64 +3,86 @@ import {
     Text,
     Content,
     Button,
-    Card
+    Card,
+    CardItem,
+
 } from "native-base";
-
 import { View, Image} from "react-native";
-
+import { Notifications } from 'expo';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import I18n from "../../../i18n/i18n";
 import styles from "./styles";
+import Api from "../../../Api";
+import PushNotification from "../push/notification";
 
-
-class Notifications extends React.Component {
+class ReceiveNotifications extends React.Component {
     static navigationOptions = {
         tabBarLabel: I18n.t('notifications', {locale: 'bg'})
     
     };
+
+    constructor(props){
+        super(props)
+        this.state = {
+            name:'',
+            clientNumber:'',
+            service:'',
+            address:'',
+            refreshing:false,
+            notification: {}
+        }
+        console.log('constructor')
+    }
+
+    componentDidMount() {
+        PushNotification();
+        this._notificationSubscription = Notifications.addListener(this._handleNotification);
+    }
+
+    _handleNotification = (notification) => {
+        this.setState({notification: notification});
+    }
+
+    changeState = (json) => {
+        console.log(json)
+        this.setState({
+            name:json.name,
+            clientNumber:json.clientNumber,
+            service:json.service,
+            address:json.address,
+            refreshing:false
+        })
+    }
+
+    loadData = () => {
+        console.log('loadDataProfile')
+        Api.post({
+            url:'average',
+            success: this.changeState
+        })
+    }
 
     render() {
         return (
             <Content padder>
                 <Card>
                     <CardItem header>
-                        <Text>Клиент</Text>
+                        <Text>Съобщения от Cooolbox</Text>
                     </CardItem>
                     <CardItem>
                         <Grid>
                             <Row>
                                 <View>
-                                    <Text style={styles.listLabel}>Име:</Text>
-                                    <Text style={styles.name}>{this.state.name}</Text>
+                                    <Text>Origin: {this.state.notification.origin}</Text>
                                 </View>
                             </Row>
-                            <Row style={styles.profileList}>
-                                <Col size={1}>
-                                    <Text style={styles.listLabel}>Клиентски номер:</Text>
-                                </Col>
-                                <Col size={2}>
-                                    <Text style={styles.listValue}>{this.state.clientNumber}</Text>
-                                </Col>
-                            </Row>
-                            <Row style={styles.profileList}>
-                                <Col size={1}>
-                                    <Text style={styles.listLabel}>Услуга:</Text>
-                                </Col>
-                                <Col size={2}>
-                                    <Text style={styles.listValue}>{this.state.service}</Text>
-                                </Col>
-                            </Row>
-                            <Row style={styles.profileList}>
-                                <Col size={1}>
-                                    <Text style={styles.listLabel}>Адрес:</Text>
-                                </Col>
-                                <Col size={2}>
-                                    <Text style={styles.listValue}>{this.state.address}</Text>
-                                </Col>
+                            <Row>
+                                <View>
+                                    <Text>Data: {JSON.stringify(this.state.notification.data)}</Text>
+                                </View>
                             </Row>
                         </Grid>
                     </CardItem>
-
                 </Card>
             </Content>
         );
@@ -68,4 +90,4 @@ class Notifications extends React.Component {
 }
 
 
-export default Notifications;
+export default ReceiveNotifications;

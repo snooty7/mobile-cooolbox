@@ -10,7 +10,7 @@ import {
     Card
 } from "native-base";
 
-import { View, Image, Text } from "react-native";
+import { View, Image, } from "react-native";
 
 import {Grid, Row, Col} from "react-native-easy-grid";
 import I18n from "../../../i18n/i18n";
@@ -71,7 +71,7 @@ class Settings extends React.Component {
     render() {
         return (
             <View>
-                <Text style={styles.texts}>Промяна на парола</Text>
+                <Text style={styles.texts_e}>Промяна на парола</Text>
                 <Form>
                     <Item style={styles.inputContainer}>
                         <Input placeholder={I18n.t('pass', {locale: 'bg'})} value={this.state.pass} onChangeText = {(newValue) => this.setState({pass:newValue})}/>
@@ -90,7 +90,7 @@ class Settings extends React.Component {
                     <Text>{I18n.t('change',{locale: 'bg'}).toUpperCase()}</Text>
                 </Button>
 
-                <Text style={styles.texts}>Промяна на имейл</Text>
+                <Text style={styles.texts_e}>Промяна на имейл</Text>
 
                 <Form>
                     <Item style={styles.inputContainer}>

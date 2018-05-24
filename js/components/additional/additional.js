@@ -45,7 +45,7 @@ class Additional extends Component {
                     <Right/>
 
                 </Header>
-
+                <Text>BLA</Text>
             </Container>
 
         );

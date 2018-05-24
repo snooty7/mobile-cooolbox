@@ -10,6 +10,6 @@ export default {
     additional: 'Additional services',
     phoneCalls: 'Phone Calls',
     networkSettings: 'Network Settings',
-    notifications: 'Notifications'
+    notifications: 'ReceiveNotifications'
 
 };

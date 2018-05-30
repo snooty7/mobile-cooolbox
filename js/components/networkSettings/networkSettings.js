@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {RefreshControl, ScrollView} from "react-native";
 import I18n from '../../../i18n/i18n';
+import Tabs from './tabs';
 import Api from '../../../Api';
 import {
     Container,
@@ -45,7 +46,7 @@ class NetworkSettings extends Component {
                     <Right/>
 
                 </Header>
-
+                <Tabs/>
             </Container>
 
         );

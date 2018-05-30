@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {RefreshControl, ScrollView} from "react-native";
+import {RefreshControl, ScrollView, View} from "react-native";
 import I18n from '../../../i18n/i18n';
 import Api from '../../../Api';
 import {
@@ -45,6 +45,60 @@ class PhoneCalls extends Component {
                     <Right/>
 
                 </Header>
+                <Content padder>
+
+                    <Card>
+                        <CardItem header>
+                            <Text style={{fontSize: 30}}>Телефонни разговори</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Grid>
+                                <Row>
+                                    <Col>
+                                        <Icon name="ios-phone-portrait" />
+                                    </Col>
+                                    <Col>
+                                        <Text style={styles.group}>Общо</Text>
+                                    </Col>
+                                    <Col>
+                                        <Text style={styles.group}>Остават</Text>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <Text style={styles.group}>Безплатни минути</Text>
+                                    </Col>
+                                    <Col>
+                                        <Text style={styles.col}>100</Text>
+                                    </Col>
+                                    <Col>
+                                        <Text style={styles.col}>100</Text>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <Text style={styles.group}>Кредитен лимит</Text>
+                                    </Col>
+                                    <Col>
+                                        <Text style={styles.col}>30 лв.</Text>
+                                    </Col>
+                                    <Col>
+                                        <Text style={styles.col}>30 лв.</Text>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Text style={{fontSize: 20, marginTop: 15}}>Забележки:</Text>
+                                </Row>
+                                <Row>
+                                    <Text style={{fontSize: 17, marginTop: 15, marginBottom: 15}}>1. Не се предоставя достъп до импулсни (например - 0900) телефони, както и до сателитни телефонни мрежи като Инмарсат и Иридиум.</Text>
+                                </Row>
+                                <Row>
+                                    <Text style={{fontSize: 17}}>2. Посочената сума не включва абонаментни такси, както и такси за устройства.</Text>
+                                </Row>
+                            </Grid>
+                        </CardItem>
+                    </Card>
+                </Content>
 
             </Container>
 

@@ -7,7 +7,7 @@ import {
     CardItem,
 
 } from "native-base";
-import { View, Image} from "react-native";
+import { View, Image, Animated} from "react-native";
 import { Notifications } from 'expo';
 import {Grid, Row, Col} from "react-native-easy-grid";
 import I18n from "../../../i18n/i18n";

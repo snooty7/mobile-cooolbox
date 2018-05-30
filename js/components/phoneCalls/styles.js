@@ -50,6 +50,16 @@ export default {
     accountValue: {
         textAlign:'right',
         color:'#617d8a'
+    },
+
+    group: {
+        marginTop: 15,
+        backgroundColor: ''
+    },
+    col: {
+        marginTop: 15,
+        marginLeft: 8,
+        backgroundColor: ''
     }
 
 };

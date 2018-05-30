@@ -1,6 +1,6 @@
 export default {
     email: 'Email',
-    newEmail: 'нов Email',
+    newEmail: 'Нов Email',
     pass: 'Парола',
     newPass: 'Нова парола',
     verifyPass: 'Потвърди новата парола',

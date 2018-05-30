@@ -10,7 +10,7 @@ import {
     Card
 } from "native-base";
 
-import { View, Image, } from "react-native";
+import {View, Image, Alert, KeyboardAvoidingView } from "react-native";
 
 import {Grid, Row, Col} from "react-native-easy-grid";
 import I18n from "../../../i18n/i18n";
@@ -19,12 +19,13 @@ import Api from "../../../Api";
 import Notification from "../push/notification";
 
 class Settings extends React.Component {
-    static navigationOptions = {
+
+    static navigationOptions = ({ navigation }) => ({
         showLabel: false,
         showIcon: true,
-        tabBarIcon: <Icon name="ios-settings"/>,
-        tabBarLabel: ''
-    };
+        tabBarIcon: ({ tintColor }) => <Icon name="ios-settings-outline" size={10} color={tintColor} />,
+        tabBarLabel: <View/>
+    });
 
     constructor(props){
         super(props);
@@ -32,46 +33,86 @@ class Settings extends React.Component {
             email:'',
             pass:'',
             newPass: '',
-            verifyPass: ''
+            verifyPass: '',
+            pass2: '',
+            newEmail: ''
         }
     }
 
     changePass = () => {
-        let loginData = {
-            email: this.state.email,
+        let passData = {
             pass: this.state.pass,
+            verifyPass: this.state.verifyPass,
         }
 
-        Api.post({
-            url:'login',
-            data: loginData,
-            success: this.loginSuccess
-        })
+        if(this.state.newPass !== this.state.verifyPass) {
+            Alert.alert(
+                'Грешка при смяна на паролата!!!',
+                'Паролите не съвпадат!',
+                [
+                    {text: 'OK', onPress: () => console.log('Ок Pressed')},
+                ],
+                {cancelable: false}
+            )
+            return true;
+        }else {
+            Api.post({
+                url:'login',
+                data: passData,
+                success: this.changePassSuccess
+            })
+        }
     }
     changeEmail = () => {
-        let loginData = {
+        let emailData = {
             email: this.state.email,
-            pass: this.state.pass,
+            newEmail: this.state.newEmail,
         }
-
         Api.post({
             url:'login',
-            data: loginData,
-            success: this.loginSuccess
+            data: emailData,
+            success: this.changeEmailSuccess
         })
+
     }
 
-    loginSuccess = (response) => {
+    changeEmailSuccess = (response) => {
         if (response.status != 'error')
 
-            Notification.sendToken(()=> this.props.navigation.navigate("MyAccount"));
+            Alert.alert(
+                'Смяна на поща',
+                'Вие успешно променихте пощата свързана с вашия профил!',
+                [
+                    {text: 'OK', onPress: () => console.log('Ок Pressed')},
+                ],
+                {cancelable: false}
+            )
+        return true;
+
+
+    };
+
+    changePassSuccess = (response) => {
+        if (response.status != 'error')
+
+            Alert.alert(
+                'Смяна на парола',
+                'Вие успешно променихте паролата свързана с вашия профил!',
+                [
+                    {text: 'OK', onPress: () => console.log('Ок Pressed')},
+                ],
+                {cancelable: false}
+            )
+        return true;
+
 
     };
 
     render() {
         return (
-            <View>
-                <Text style={styles.texts_e}>Промяна на парола</Text>
+            <Content contentContainerStyle={{flex: 1}}
+            >
+                <Text style={{fontSize: 20, marginLeft: 100, marginTop: 5, marginBottom: 5}}>Промяна на парола</Text>
                 <Form>
                     <Item style={styles.inputContainer}>
                         <Input placeholder={I18n.t('pass', {locale: 'bg'})} value={this.state.pass} onChangeText = {(newValue) => this.setState({pass:newValue})}/>
@@ -84,32 +125,31 @@ class Settings extends React.Component {
                     </Item>
                 </Form>
 
-                <Button block style={styles.emailButton} onPress={() =>
+                <Button block style={{margin: 15}} onPress={() =>
                     this.changePass()
                 }>
                     <Text>{I18n.t('change',{locale: 'bg'}).toUpperCase()}</Text>
                 </Button>
+                    <Text style={{fontSize: 20, marginLeft: 100, marginBottom: 5}}>Промяна на имейл</Text>
 
-                <Text style={styles.texts_e}>Промяна на имейл</Text>
+                    <Form>
+                        <Item style={styles.inputContainer1}>
+                            <Input placeholder={I18n.t('pass', {locale: 'bg'})} value={this.state.pass2} onChangeText = {(newValue) => this.setState({pass2:newValue})}/>
+                        </Item>
+                        <Item style={styles.inputContainer1}>
+                            <Input secureTextEntry={true} placeholder={I18n.t('email',{locale: 'bg'})} value={this.state.email} onChangeText = {(newValue) => this.setState({email:newValue})}/>
+                        </Item>
+                        <Item style={styles.inputContainer1}>
+                            <Input secureTextEntry={true} placeholder={I18n.t('newEmail',{locale: 'bg'})} value={this.state.newEmail} onChangeText = {(newValue) => this.setState({newEmail:newValue})}/>
+                        </Item>
+                    </Form>
 
-                <Form>
-                    <Item style={styles.inputContainer}>
-                        <Input placeholder={I18n.t('pass', {locale: 'bg'})} value={this.state.pass} onChangeText = {(newValue) => this.setState({pass:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('email',{locale: 'bg'})} value={this.state.email} onChangeText = {(newValue) => this.setState({email:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('newEmail',{locale: 'bg'})} value={this.state.newEmail} onChangeText = {(newValue) => this.setState({newEmail:newValue})}/>
-                    </Item>
-                </Form>
-
-                <Button block style={styles.emailButton} onPress={() =>
-                    this.changeEmail()
-                }>
-                    <Text>{I18n.t('change',{locale: 'bg'}).toUpperCase()}</Text>
-                </Button>
-            </View>
+                    <Button block style={{margin: 15}} onPress={() =>
+                        this.changeEmail()
+                    }>
+                        <Text>{I18n.t('change',{locale: 'bg'}).toUpperCase()}</Text>
+                    </Button>
+            </Content>
         );
     }
 }

@@ -29,7 +29,9 @@ export default {
     emailButton: {
         color: '#bfcd31',
         margin: 15,
-        fontSize: 20
+        fontSize: 20,
+        marginLeft: 15,
+        marginRight: 15
     },
     texts_e: {
         fontSize: 20,

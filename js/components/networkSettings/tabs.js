@@ -9,9 +9,9 @@ import {
 
 import { View, Image} from "react-native";
 
-import Profile from './profile';
-import Settings from './settings';
-import NotificationsHandler from './../push/not';
+import SwitchMode from './switchMode';
+import ExternalNetwork from './externalNetwork';
+import InternalNetwork from './internalNetwork';
 import {Grid, Row, Col} from "react-native-easy-grid";
 
 const avatar = require("../../../img/profile-login.png");
@@ -19,14 +19,14 @@ const avatar = require("../../../img/profile-login.png");
 
 
 const Tabs = TabNavigator({
-    Profile: {
-        screen: Profile,
+    SwitchMode: {
+        screen: SwitchMode,
     },
-    Settings: {
-        screen: Settings,
+    ExternalNetwork: {
+        screen: ExternalNetwork,
     },
-    Notifications: {
-        screen: NotificationsHandler,
+    InternalNetwork: {
+        screen: InternalNetwork,
     },
 },
     {

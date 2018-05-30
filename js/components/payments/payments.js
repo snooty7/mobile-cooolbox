@@ -49,7 +49,7 @@ class Payments extends Component {
                 <Content padder>
                     <Card>
                         <CardItem header>
-                            <Text>Фактури и плащания</Text>
+                            <Text>Плащане и фактури</Text>
                         </CardItem>
                         <CardItem>
                             <Grid>

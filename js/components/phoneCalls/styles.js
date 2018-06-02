@@ -58,8 +58,7 @@ export default {
     },
     col: {
         marginTop: 15,
-        marginLeft: 8,
-        backgroundColor: ''
+        marginLeft: 8
     }
 
 };

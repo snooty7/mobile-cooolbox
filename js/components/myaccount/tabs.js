@@ -11,7 +11,7 @@ import { View, Image} from "react-native";
 
 import Profile from './profile';
 import Settings from './settings';
-import NotificationsHandler from './../push/not';
+import ReceiveNotifications from './notifications';
 import {Grid, Row, Col} from "react-native-easy-grid";
 
 const avatar = require("../../../img/profile-login.png");
@@ -26,7 +26,7 @@ const Tabs = TabNavigator({
         screen: Settings,
     },
     Notifications: {
-        screen: NotificationsHandler,
+        screen: ReceiveNotifications,
     },
 },
     {

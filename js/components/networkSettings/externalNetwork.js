@@ -7,7 +7,8 @@ import {
     Form,
     Item,
     Input,
-    Card
+    Card,
+    CardItem
 } from "native-base";
 
 import { View, Image, } from "react-native";
@@ -32,6 +33,7 @@ class ExternalNetwork extends React.Component {
             email:'',
             pass:'',
             newPass: '',
+            mac: '',
             verifyPass: ''
         }
     }
@@ -70,46 +72,42 @@ class ExternalNetwork extends React.Component {
 
     render() {
         return (
-            <View>
-                <Text style={styles.texts_e}>Промяна на парола</Text>
-                <Form>
-                    <Item style={styles.inputContainer}>
-                        <Input placeholder={I18n.t('pass', {locale: 'bg'})} value={this.state.pass} onChangeText = {(newValue) => this.setState({pass:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('newPass',{locale: 'bg'})} value={this.state.newPass} onChangeText = {(newValue) => this.setState({newPass:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('verifyPass',{locale: 'bg'})} value={this.state.verifyPass} onChangeText = {(newValue) => this.setState({verifyPass:newValue})}/>
-                    </Item>
-                </Form>
-
-                <Button block style={styles.emailButton} onPress={() =>
-                    this.changePass()
-                }>
-                    <Text>{I18n.t('change',{locale: 'bg'}).toUpperCase()}</Text>
-                </Button>
-
-                <Text style={styles.texts_e}>Промяна на имейл</Text>
-
-                <Form>
-                    <Item style={styles.inputContainer}>
-                        <Input placeholder={I18n.t('pass', {locale: 'bg'})} value={this.state.pass} onChangeText = {(newValue) => this.setState({pass:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('email',{locale: 'bg'})} value={this.state.email} onChangeText = {(newValue) => this.setState({email:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('newEmail',{locale: 'bg'})} value={this.state.newEmail} onChangeText = {(newValue) => this.setState({newEmail:newValue})}/>
-                    </Item>
-                </Form>
-
-                <Button block style={styles.emailButton} onPress={() =>
-                    this.changeEmail()
-                }>
-                    <Text>{I18n.t('change',{locale: 'bg'}).toUpperCase()}</Text>
-                </Button>
-            </View>
+            <Content padder>
+                <Card>
+                    <CardItem header>
+                        <Text style={{marginLeft: 80, fontSize: 30}}>DHCP настройки</Text>
+                    </CardItem>
+                    <CardItem>
+                        <Grid>
+                            <Row>
+                                <Text style={{margin: 5, fontSize: 15}}>Рутер IP: 192.168.1.1</Text>
+                            </Row>
+                            <Row>
+                                <Text style={{margin: 5, fontSize: 15}}>DHCP обхват: от 192.168.1.100 до 192.168.1.200</Text>
+                            </Row>
+                            <Row>
+                                <Text style={{margin: 5, fontSize: 15}}>DHCP резервации</Text>
+                            </Row>
+                            <Form>
+                                <Item style={styles.inputContainer}>
+                                    <Input placeholder={I18n.t('description', {locale: 'bg'})} ref={component5 => this._textInput5 = component5} value={this.state.description} onChangeText = {(newValue) => this.setState({description:newValue})}/>
+                                </Item>
+                                <Item style={styles.inputContainer}>
+                                    <Input placeholder="MAC Address" ref={component5 => this._textInput5 = component5} value={this.state.mac} onChangeText = {(newValue) => this.setState({mac:newValue})}/>
+                                </Item>
+                                <Item style={styles.inputContainer}>
+                                    <Input placeholder={I18n.t('ipAddress', {locale: 'bg'})} ref={component5 => this._textInput5 = component5} value={this.state.ipAddress} onChangeText = {(newValue) => this.setState({ipAddress:newValue})}/>
+                                </Item>
+                            </Form>
+                            <Button block style={{margin: 15}} onPress={() =>
+                                this.restrictIp()
+                            }>
+                                <Text>{I18n.t('change',{locale: 'bg'}).toUpperCase()}</Text>
+                            </Button>
+                        </Grid>
+                    </CardItem>
+                </Card>
+            </Content>
         );
     }
 }

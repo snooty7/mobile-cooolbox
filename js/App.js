@@ -8,7 +8,7 @@ import Drawer from "./Drawer";
 
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
-import Notification from "./components/push/notification";
+import ReceiveNotifications from "./components/myaccount/notifications";
 
 const AppNavigator = StackNavigator(
     {
@@ -27,5 +27,4 @@ export default () =>
         <StyleProvider style={getTheme(material)}>
             <AppNavigator />
         </StyleProvider>
-        <Notification/>
     </Root>;

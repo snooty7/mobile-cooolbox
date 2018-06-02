@@ -7,7 +7,8 @@ import {
     Form,
     Item,
     Input,
-    Card
+    Card,
+    CardItem
 } from "native-base";
 
 import { View, Image, } from "react-native";
@@ -29,10 +30,9 @@ class InternalNetwork extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            email:'',
-            pass:'',
-            newPass: '',
-            verifyPass: ''
+            publicPort: '',
+            ipAddress: '',
+            privatePort: ''
         }
     }
 
@@ -70,46 +70,33 @@ class InternalNetwork extends React.Component {
 
     render() {
         return (
-            <View>
-                <Text style={styles.texts_e}>Промяна на парола</Text>
-                <Form>
-                    <Item style={styles.inputContainer}>
-                        <Input placeholder={I18n.t('pass', {locale: 'bg'})} value={this.state.pass} onChangeText = {(newValue) => this.setState({pass:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('newPass',{locale: 'bg'})} value={this.state.newPass} onChangeText = {(newValue) => this.setState({newPass:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('verifyPass',{locale: 'bg'})} value={this.state.verifyPass} onChangeText = {(newValue) => this.setState({verifyPass:newValue})}/>
-                    </Item>
-                </Form>
-
-                <Button block style={styles.emailButton} onPress={() =>
-                    this.changePass()
-                }>
-                    <Text>{I18n.t('change',{locale: 'bg'}).toUpperCase()}</Text>
-                </Button>
-
-                <Text style={styles.texts_e}>Промяна на имейл</Text>
-
-                <Form>
-                    <Item style={styles.inputContainer}>
-                        <Input placeholder={I18n.t('pass', {locale: 'bg'})} value={this.state.pass} onChangeText = {(newValue) => this.setState({pass:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('email',{locale: 'bg'})} value={this.state.email} onChangeText = {(newValue) => this.setState({email:newValue})}/>
-                    </Item>
-                    <Item style={styles.inputContainer}>
-                        <Input secureTextEntry={true} placeholder={I18n.t('newEmail',{locale: 'bg'})} value={this.state.newEmail} onChangeText = {(newValue) => this.setState({newEmail:newValue})}/>
-                    </Item>
-                </Form>
-
-                <Button block style={styles.emailButton} onPress={() =>
-                    this.changeEmail()
-                }>
-                    <Text>{I18n.t('change',{locale: 'bg'}).toUpperCase()}</Text>
-                </Button>
-            </View>
+            <Content padder>
+                <Card>
+                    <CardItem header>
+                        <Text style={{marginLeft: 20, fontSize: 20}}>Пренасочване на порт</Text>
+                    </CardItem>
+                    <CardItem>
+                        <Grid>
+                            <Form>
+                                <Item style={styles.inputContainer}>
+                                    <Input placeholder='Public Port' ref={component5 => this._textInput5 = component5} value={this.state.publicPort} onChangeText = {(newValue) => this.setState({publicPort:newValue})}/>
+                                </Item>
+                                <Item style={styles.inputContainer}>
+                                    <Input placeholder={I18n.t('ipAddress', {locale: 'bg'})} ref={component5 => this._textInput5 = component5} value={this.state.ipAddress} onChangeText = {(newValue) => this.setState({ipAddress:newValue})}/>
+                                </Item>
+                                <Item style={styles.inputContainer}>
+                                    <Input placeholder='Private Port' ref={component5 => this._textInput5 = component5} value={this.state.privatePort} onChangeText = {(newValue) => this.setState({privatePort:newValue})}/>
+                                </Item>
+                            </Form>
+                            <Button block style={{margin: 15}} onPress={() =>
+                                this.restrictIp()
+                            }>
+                                <Text>ЗАПАЗИ</Text>
+                            </Button>
+                        </Grid>
+                    </CardItem>
+                </Card>
+            </Content>
         );
     }
 }

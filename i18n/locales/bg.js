@@ -18,6 +18,8 @@ export default {
     notifications: 'Известия',
     tv: 'Телевизия',
     errorLoging: 'Грешен имейл или парола!!!',
-    add: 'Добави Банкова Карта'
+    add: 'Добави Банкова Карта',
+    description: 'Описание',
+    ipAddress: 'IP Адрес'
 
 };

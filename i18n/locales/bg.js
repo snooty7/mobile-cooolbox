@@ -20,6 +20,7 @@ export default {
     errorLoging: 'Грешен имейл или парола!!!',
     add: 'Добави Банкова Карта',
     description: 'Описание',
-    ipAddress: 'IP Адрес'
+    ipAddress: 'IP Адрес',
+    bank_card: 'Карта №'
 
 };

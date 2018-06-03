@@ -176,7 +176,6 @@ class Users extends Component {
                         </Card>
                     </Content>
                 </Container>
-
         );
     }
 }

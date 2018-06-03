@@ -9,12 +9,6 @@ export default {
         paddingTop:20,
         paddingBottom:20
     },
-    safeBalanceContainer: {
-        backgroundColor: "#fff",
-    },
-    balancesContainer: {
-        backgroundColor: "#fce0d4",
-    },
 
     balanceView: {
         borderBottomColor: '#fff',
@@ -32,14 +26,12 @@ export default {
         justifyContent: 'center',
         width: 30,
         height: 30,
-        backgroundColor: '#ff8600',
         borderRadius: 30
     },
     headerIcon: {
         color:"#fff",
     },
     headerLabel: {
-        color:"#617d8a",
         fontSize:14,
         marginLeft:7
     },
@@ -47,9 +39,36 @@ export default {
         height:30
     },
 
-    accountValue: {
-        textAlign:'right',
-        color:'#617d8a'
+    infoContainer: {
+        padding:10,
+        borderColor: '#F5F5F5',
+        borderWidth:1,
+        height:'100%'
+    },
+
+    profileList: {
+        borderBottomColor: '#F5F5F5',
+        borderBottomWidth: 1,
+        paddingTop:10,
+        paddingBottom:10
+    },
+
+    listValue: {
+        alignSelf: 'stretch',
+        textAlign: 'right'
+    },
+
+    emailButton: {
+        margin: 15,
+        fontSize: 20,
+        marginLeft: 15,
+        marginRight: 15
+    },
+
+    inputBackground: {
+        backgroundColor: '#e5e0e0',
+        marginTop: 15,
+        marginBottom: 15
     }
 
 };

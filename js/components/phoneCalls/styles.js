@@ -53,12 +53,12 @@ export default {
     },
 
     group: {
-        marginTop: 15,
-        backgroundColor: ''
+        marginTop: 15
     },
     col: {
         marginTop: 15,
         marginLeft: 8
     }
+
 
 };

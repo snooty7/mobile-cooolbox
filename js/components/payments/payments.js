@@ -34,18 +34,30 @@ class Payments extends Component {
         super(props);
         this.state={
             card_number:'',
+            bill_number: '',
             results: [],
-            active: 1
+            results_: [],
+            active: 1,
+            payed: 1
         }
     }
 
     componentDidMount () {
         this.loadActvieBankCards()
+        this.loadActiveBills()
     }
 
     changeState = (json) => {
         this.setState({
             results: json.results
+        })
+        console.log(this.results);
+        console.log(typeof(this.results));
+    }
+
+    changeStateBills = (json) => {
+        this.setState({
+            results_: json.results
         })
         console.log(this.results);
         console.log(typeof(this.results));
@@ -59,10 +71,18 @@ class Payments extends Component {
         })
     }
 
+    loadActiveBills = () => {
+        console.log('loadActvieBills')
+        Api.post({
+            url:'bills_payments',
+            success: this.changeStateBills
+        })
+    }
+
     addCard = () => {
         let insertData = {
-            card_number: this.state.email_,
-            privilege: 1
+            card_number: this.state.card_number,
+            active: 1
         }
 
         Api.post({
@@ -96,15 +116,15 @@ class Payments extends Component {
     }
 
     payBill = (em) => {
-        let deleteData = {
-            privilege: 0,
-            id_: em
+        let payData = {
+            payed: 0,
+            _id_: em
         }
 
         Api.post({
-            url:'users',
-            data: deleteData,
-            success: this.loadActvieBankCards()
+            url:'bills_payments',
+            data: payData,
+            success: this.loadActiveBills()
         })
 
     };
@@ -141,16 +161,18 @@ class Payments extends Component {
                                         </Text>
                                     </Row>
                                     <Row>
-                                        <Form>
-                                            <Item>
-                                                <Input style={{width: 100, margin: 5}} placeholder={I18n.t('bank_card', {locale: 'bg'})} value={this.state.card_number} onChangeText = {(newValue) => this.setState({card_number:newValue})}/>
-                                            </Item>
-                                        </Form>
-                                        <Button block style={styles.emailButton} onPress={() =>
-                                            this.addCard()
-                                        }>
-                                            <Text>Добавяне</Text>
-                                        </Button>
+                                        <View style={{flex: 1}}>
+                                            <Form>
+                                                <Item>
+                                                    <Input style={styles.inputBackground} placeholder={I18n.t('bank_card', {locale: 'bg'})} value={this.state.card_number} onChangeText = {(newValue) => this.setState({card_number:newValue})}/>
+                                                </Item>
+                                            </Form>
+                                            <Button block style={styles.emailButton} onPress={() =>
+                                                this.addCard()
+                                            }>
+                                                <Text>Добавяне</Text>
+                                            </Button>
+                                        </View>
                                     </Row>
                                     <Row>
                                         <Text style={{marginLeft: 35, fontSize: 20}}>Регистрирани карти:</Text>
@@ -165,7 +187,7 @@ class Payments extends Component {
                                                         <Row>
                                                             <Col>
                                                                 <Text id={item.id_} style={{fontSize: 18, marginLeft: 5,
-                                                                    marginTop: 10}}>{item.email}</Text>
+                                                                    marginTop: 10}}>{item.card_number}</Text>
                                                             </Col>
                                                             <Col>
                                                                 <Button transparent
@@ -177,7 +199,7 @@ class Payments extends Component {
                                                         </Row>
                                                     </Grid>
                                                 }
-                                                keyExtractor={item => item.email}
+                                                keyExtractor={item => item.card_number}
                                             />
                                         </Col>
                                     </Row>
@@ -187,18 +209,18 @@ class Payments extends Component {
                                     <Row>
                                         <Col>
                                             <FlatList
-                                                data={this.state.results}
+                                                data={this.state.results_}
                                                 showsVerticalScrollIndicator={false}
                                                 renderItem={({item}) =>
                                                     <Grid>
                                                         <Row>
                                                             <Col>
-                                                                <Text id={item.id_} style={{fontSize: 18, marginLeft: 5,
-                                                                    marginTop: 10}}>{item.email}</Text>
+                                                                <Text id={item._id_} style={{fontSize: 18, marginLeft: 5,
+                                                                    marginTop: 10}}>{item.bill_number}</Text>
                                                             </Col>
                                                             <Col>
                                                                 <Button transparent
-                                                                        onPress={() => this.payBill(item.id_)}
+                                                                        onPress={() => this.payBill(item._id_)}
                                                                 >
                                                                     <Icon name="ios-cash"/>
                                                                 </Button>
@@ -206,7 +228,7 @@ class Payments extends Component {
                                                         </Row>
                                                     </Grid>
                                                 }
-                                                keyExtractor={item => item.email}
+                                                keyExtractor={item => item.bill_number}
                                             />
                                         </Col>
                                     </Row>

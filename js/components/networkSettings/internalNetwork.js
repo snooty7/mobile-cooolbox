@@ -77,22 +77,24 @@ class InternalNetwork extends React.Component {
                     </CardItem>
                     <CardItem>
                         <Grid>
-                            <Form>
-                                <Item style={styles.inputContainer}>
-                                    <Input placeholder='Public Port' ref={component5 => this._textInput5 = component5} value={this.state.publicPort} onChangeText = {(newValue) => this.setState({publicPort:newValue})}/>
-                                </Item>
-                                <Item style={styles.inputContainer}>
-                                    <Input placeholder={I18n.t('ipAddress', {locale: 'bg'})} ref={component5 => this._textInput5 = component5} value={this.state.ipAddress} onChangeText = {(newValue) => this.setState({ipAddress:newValue})}/>
-                                </Item>
-                                <Item style={styles.inputContainer}>
-                                    <Input placeholder='Private Port' ref={component5 => this._textInput5 = component5} value={this.state.privatePort} onChangeText = {(newValue) => this.setState({privatePort:newValue})}/>
-                                </Item>
-                            </Form>
-                            <Button block style={{margin: 15}} onPress={() =>
-                                this.restrictIp()
-                            }>
-                                <Text>ЗАПАЗИ</Text>
-                            </Button>
+                            <View style={{flex: 1}}>
+                                <Form>
+                                    <Item style={styles.inputContainer}>
+                                        <Input placeholder='Public Port' ref={component5 => this._textInput5 = component5} value={this.state.publicPort} onChangeText = {(newValue) => this.setState({publicPort:newValue})}/>
+                                    </Item>
+                                    <Item style={styles.inputContainer}>
+                                        <Input placeholder={I18n.t('ipAddress', {locale: 'bg'})} ref={component5 => this._textInput5 = component5} value={this.state.ipAddress} onChangeText = {(newValue) => this.setState({ipAddress:newValue})}/>
+                                    </Item>
+                                    <Item style={styles.inputContainer}>
+                                        <Input placeholder='Private Port' ref={component5 => this._textInput5 = component5} value={this.state.privatePort} onChangeText = {(newValue) => this.setState({privatePort:newValue})}/>
+                                    </Item>
+                                </Form>
+                                <Button block style={{margin: 15}} onPress={() =>
+                                    this.restrictIp()
+                                }>
+                                    <Text>ЗАПАЗИ</Text>
+                                </Button>
+                            </View>
                         </Grid>
                     </CardItem>
                 </Card>

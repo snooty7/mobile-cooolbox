@@ -51,6 +51,7 @@ export default {
         textAlign:'right',
         color:'#617d8a'
     },
+
     inputBackground: {
         backgroundColor: '#e5e0e0',
         marginTop: 15,

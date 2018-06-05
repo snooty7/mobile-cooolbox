@@ -32,7 +32,6 @@ export default {
         color:"#fff",
     },
     headerLabel: {
-        fontSize:14,
         marginLeft:7
     },
     headerButton: {
@@ -60,15 +59,18 @@ export default {
 
     emailButton: {
         margin: 15,
-        fontSize: 20,
-        marginLeft: 15,
+        flex: 1,
+        marginLeft: 45,
         marginRight: 15
     },
 
     inputBackground: {
         backgroundColor: '#e5e0e0',
+        flex: 1,
         marginTop: 15,
-        marginBottom: 15
+        marginBottom: 15,
+        alignSelf: 'stretch',
+        textAlign: 'center'
     }
 
 };

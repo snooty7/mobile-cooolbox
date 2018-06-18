@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {RefreshControl, ScrollView, View} from "react-native";
+import {Alert, BackHandler, RefreshControl, ScrollView, View} from "react-native";
 import I18n from '../../../i18n/i18n';
 import Api from '../../../Api';
 import {
@@ -25,6 +25,38 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 import styles from "./styles";
 
 class PhoneCalls extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            sum_m:'',
+            remain_m:'',
+            sum_k:'',
+            remain_k:''
+        }
+    }
+
+    componentDidMount () {
+        this.loadData()
+    }
+
+    changeState = (json) => {
+        console.log(json)
+        this.setState({
+            sum_m:json.sum_m,
+            remain_m:json.remain_m,
+            sum_k:json.sum_k,
+            remain_k:json.remain_k,
+        })
+    }
+
+    loadData = () => {
+        console.log('loadDataPhoneCalls')
+        Api.post({
+            url:'phonecalls',
+            success: this.changeState
+        })
+    }
 
     render() {
         return (
@@ -69,10 +101,10 @@ class PhoneCalls extends Component {
                                         <Text style={styles.group}>Безплатни минути</Text>
                                     </Col>
                                     <Col>
-                                        <Text style={styles.col}>100</Text>
+                                        <Text style={styles.col}>{this.state.sum_m}</Text>
                                     </Col>
                                     <Col>
-                                        <Text style={styles.col}>100</Text>
+                                        <Text style={styles.col}>{this.state.remain_m}</Text>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -80,10 +112,10 @@ class PhoneCalls extends Component {
                                         <Text style={styles.group}>Кредитен лимит</Text>
                                     </Col>
                                     <Col>
-                                        <Text style={styles.col}>30 лв.</Text>
+                                        <Text style={styles.col}>{this.state.sum_k} лв.</Text>
                                     </Col>
                                     <Col>
-                                        <Text style={styles.col}>30 лв.</Text>
+                                        <Text style={styles.col}>{this.state.remain_k} лв.</Text>
                                     </Col>
                                 </Row>
                                 <Row>

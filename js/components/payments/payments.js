@@ -96,7 +96,7 @@ class Payments extends Component {
     insertSuccess = (response) => {
         if (response.status != 'error')
 
-            Alert.alert('Вие успешно добавихте банкова карта към вашия профил!');
+            Alert.alert('Регистрацията премина успешно!');
         this.loadActvieBankCards();
         return true;
 

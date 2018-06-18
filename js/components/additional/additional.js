@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {RefreshControl, ScrollView, View} from "react-native";
+import {Alert, BackHandler, RefreshControl, ScrollView, View} from "react-native";
 import I18n from '../../../i18n/i18n';
 import Api from '../../../Api';
 import {
@@ -23,8 +23,89 @@ import {
 import {Grid, Row, Col} from "react-native-easy-grid";
 
 import styles from "./styles";
+import Notification from "../push/notification";
 
 class Additional extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            checkHbo: '',
+            checkDiema: '',
+            HBO: '',
+            HBO_mode: '',
+            DIEMA_mode: '',
+            DIEMA: ''
+
+        }
+        console.log('constructor')
+    }
+
+    componentDidMount () {
+        this.loadData()
+    }
+
+    changeState = (json) => {
+        console.log(json)
+        this.setState({
+            HBO:json.HBO,
+            DIEMA:json.DIEMA,
+            checkHbo: json.HBO_mode,
+            checkDiema: json.DIEMA_mode
+        })
+    }
+
+    loadData = () => {
+        console.log('loadDataAdditional')
+        Api.post({
+            url:'additional',
+            success: this.changeState
+        })
+    }
+
+    checkAdditionalHbo = () => {
+        if (this.state.HBO === 'Активна') {
+            this.setState({
+                HBO: 'Спри',
+                checkHbo: 'ПУСНИ'
+            })
+        }else {
+            this.setState({
+                HBO: 'Активна',
+                checkHbo: 'СПРИ'
+            })
+        }
+        console.log(this.state.HBO);
+        let HBOData = {
+            HBO: this.state.HBO,
+        }
+        Api.post({
+            url:'additional',
+            data: HBOData
+        })
+    }
+
+    checkAdditionalDiema = () => {
+        if (this.state.DIEMA === 'Активна') {
+            this.setState({
+                DIEMA: 'Спряна',
+                checkDiema: 'ПУСНИ'
+            })
+        }else {
+            this.setState({
+                DIEMA: 'Активна',
+                checkDiema: 'ПУСНИ'
+            })
+        }
+
+        let DIEMAData = {
+            DIEMA: this.state.DIEMA,
+        }
+        Api.post({
+            url:'additional',
+            data: DIEMAData,
+        })
+    }
 
     render() {
         return (
@@ -74,13 +155,13 @@ class Additional extends Component {
                                         <Text style={{marginLeft: 15, marginTop: 14, right: 0}}>9.00 лв.</Text>
                                     </Col>
                                     <Col>
-                                        <Text style={{marginLeft: 15, marginTop: 14, right: 0}}>Активна</Text>
+                                        <Text style={{marginLeft: 15, marginTop: 14, right: 0}}>{this.state.HBO}</Text>
                                     </Col>
                                     <Col>
                                         <Button transparent style={{marginLeft: 15, marginTop: 4, right: 0}}
-                                                onPress={() => this.checkAdditional()}
+                                                onPress={() => this.checkAdditionalHbo()}
                                         >
-                                            <Text>Спри</Text>
+                                            <Text style={{width: 50}}>{this.state.checkHbo}</Text>
                                         </Button>
                                     </Col>
                                 </Row>
@@ -92,13 +173,13 @@ class Additional extends Component {
                                         <Text style={{marginLeft: 15, marginTop: 14, right: 0}}>5.99 лв.</Text>
                                     </Col>
                                     <Col>
-                                        <Text style={{marginLeft: 15, marginTop: 14, right: 0}}>Активна</Text>
+                                        <Text style={{marginLeft: 15, marginTop: 14, right: 0}}>{this.state.DIEMA}</Text>
                                     </Col>
                                     <Col>
                                         <Button transparent style={{marginLeft: 15, marginTop: 4, right: 0}}
-                                                onPress={() => this.checkAdditional()}
+                                                onPress={() => this.checkAdditionalDiema()}
                                         >
-                                            <Text>Спри</Text>
+                                            <Text style={{width: 50}}>{this.state.checkDiema}</Text>
                                         </Button>
                                     </Col>
                                 </Row>

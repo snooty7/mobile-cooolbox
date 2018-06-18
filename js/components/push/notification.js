@@ -42,6 +42,7 @@ class PushNotification extends React.Component {
             success: callback(),
             error: callback()
         })
+        console.log(callback + " error")
     };
 
     componentDidMount() {

@@ -75,10 +75,8 @@ class Users extends Component {
 
     insertSuccess = (response) => {
         if (response.status != 'error')
-
             Alert.alert('Вие успешно добавихте потребител към вашия профил!');
         return true;
-
     };
 
     deleteUser = (em) => {

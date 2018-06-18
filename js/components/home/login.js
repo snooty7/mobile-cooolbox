@@ -56,7 +56,8 @@ class Login extends React.Component {
     loginSuccess = (response) => {
         if (response.status != 'error')
 
-            Notification.sendToken(()=> this.props.navigation.navigate("MyAccount"));
+            //Notification.sendToken(()=> this.props.navigation.navigate("MyAccount"));
+            this.props.navigation.navigate("MyAccount");
 
     };
 

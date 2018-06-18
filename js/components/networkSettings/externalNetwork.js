@@ -11,7 +11,7 @@ import {
     CardItem
 } from "native-base";
 
-import { View, Image, } from "react-native";
+import {View, Image, Alert, FlatList} from "react-native";
 
 import {Grid, Row, Col} from "react-native-easy-grid";
 import I18n from "../../../i18n/i18n";
@@ -30,43 +30,64 @@ class ExternalNetwork extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            email:'',
-            pass:'',
-            newPass: '',
+            ipAddress:'',
             mac: '',
-            verifyPass: ''
+            active: 1,
+            ip_address: ''
         }
     }
+    componentDidMount () {
+        this.loadData()
+    }
 
-    changePass = () => {
-        let loginData = {
-            email: this.state.email,
-            pass: this.state.pass,
-        }
-
-        Api.post({
-            url:'login',
-            data: loginData,
-            success: this.loginSuccess
+    changeState = (json) => {
+        this.setState({
+            results: json.results
         })
+        console.log(this.results);
+        console.log(typeof(this.results));
     }
-    changeEmail = () => {
-        let loginData = {
-            email: this.state.email,
-            pass: this.state.pass,
-        }
 
+    loadData = () => {
+        console.log('load Actvie Dhcp Reservations')
         Api.post({
-            url:'login',
-            data: loginData,
-            success: this.loginSuccess
+            url:'dhcp_reservation',
+            success: this.changeState
         })
     }
 
-    loginSuccess = (response) => {
+    removeDhcp = (it) => {
+        let deleteData = {
+            active: 0,
+            id_: it
+        }
+
+        Api.post({
+            url:'dhcp_reservation',
+            data: deleteData,
+            success: this.loadData()
+        })
+    }
+
+    dhcpReserve = () => {
+        let dhcp = {
+            ipAddress: this.state.ipAddress,
+            mac: this.state.mac,
+            active: 1
+        }
+
+        Api.post({
+            url:'dhcp_reservation',
+            data: dhcp,
+            success: this.dhcpSuccess
+        })
+    }
+
+    dhcpSuccess = (response) => {
         if (response.status != 'error')
 
-            Notification.sendToken(()=> this.props.navigation.navigate("MyAccount"));
+            Alert.alert('Вие направихте успешна резервация на IP Адрес!');
+            this.loadData();
 
     };
 
@@ -86,12 +107,9 @@ class ExternalNetwork extends React.Component {
                                 <Text style={{margin: 5, fontSize: 15}}>DHCP обхват: от 192.168.1.100 до 192.168.1.200</Text>
                             </Row>
                             <Row>
-                                <Text style={{margin: 5, fontSize: 15}}>DHCP резервации</Text>
+                                <Text style={{margin: 5, fontSize: 20, marginLeft: 15}}>DHCP резервации</Text>
                             </Row>
                             <Form>
-                                <Item style={styles.inputContainer}>
-                                    <Input placeholder={I18n.t('description', {locale: 'bg'})} ref={component5 => this._textInput5 = component5} value={this.state.description} onChangeText = {(newValue) => this.setState({description:newValue})}/>
-                                </Item>
                                 <Item style={styles.inputContainer}>
                                     <Input placeholder="MAC Address" ref={component5 => this._textInput5 = component5} value={this.state.mac} onChangeText = {(newValue) => this.setState({mac:newValue})}/>
                                 </Item>
@@ -100,10 +118,37 @@ class ExternalNetwork extends React.Component {
                                 </Item>
                             </Form>
                             <Button block style={{margin: 15}} onPress={() =>
-                                this.restrictIp()
+                                this.dhcpReserve()
                             }>
-                                <Text>{I18n.t('change',{locale: 'bg'}).toUpperCase()}</Text>
+                                <Text>ЗАПАЗИ</Text>
                             </Button>
+                            <Row>
+                                <Text>Запазени ip адреси:</Text>
+                            </Row>
+                            <FlatList
+                                data={this.state.results}
+                                showsVerticalScrollIndicator={false}
+                                renderItem={({item}) =>
+                                    <Grid>
+                                        <Row>
+                                            <Col>
+                                                <Text id={item.mac} style={{marginTop: 10, width: 140}}>{item.mac}</Text>
+                                            </Col>
+                                            <Col>
+                                                <Text id={item.ip_address} style={{marginTop: 10, marginLeft: 35, width: 130}}>{item.ip_address}</Text>
+                                            </Col>
+                                            <Col>
+                                                <Button transparent style={{marginLeft: 25}}
+                                                        onPress={() => this.removeDhcp(item.id_)}
+                                                >
+                                                    <Icon name="ios-trash"/>
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Grid>
+                                }
+                                keyExtractor={item => item.mac}
+                            />
                         </Grid>
                     </CardItem>
                 </Card>

@@ -73,7 +73,7 @@ class InternalNetwork extends React.Component {
             <Content padder>
                 <Card>
                     <CardItem header>
-                        <Text style={{marginLeft: 20, fontSize: 20}}>Пренасочване на порт</Text>
+                        <Text style={{marginLeft: 10, fontSize: 20, marginTop: 0}}>Пренасочване на порт</Text>
                     </CardItem>
                     <CardItem>
                         <Grid>
@@ -88,9 +88,25 @@ class InternalNetwork extends React.Component {
                                     <Item style={styles.inputContainer}>
                                         <Input placeholder='Private Port' ref={component5 => this._textInput5 = component5} value={this.state.privatePort} onChangeText = {(newValue) => this.setState({privatePort:newValue})}/>
                                     </Item>
+                                    <Button block style={{margin: 15}} onPress={() =>
+                                        this.restrictIp()
+                                    }>
+                                        <Text>ЗАПАЗИ</Text>
+                                    </Button>
+                                    <Text style={{fontSize: 20, marginBottom: 5, marginLeft: 10,}}>Задайте име на вашата мрежа</Text>
+
+                                    <Item style={styles.inputContainer}>
+                                        <Input placeholder="Мрежа" ref={component2 => this._textInput2 = component2} value={this.state.pass2} onChangeText = {(newValue) => this.setState({pass2:newValue})} />
+                                    </Item>
+                                    <Item style={styles.inputContainer}>
+                                        <Input secureTextEntry={true} placeholder={I18n.t('pass',{locale: 'bg'})} ref={component1 => this._textInput1 = component1} value={this.state.email} onChangeText = {(newValue) => this.setState({email:newValue})} />
+                                    </Item>
+                                    <Item style={styles.inputContainer}>
+                                        <Input secureTextEntry={true} placeholder="Потвърди парола" ref={component => this._textInput = component} value={this.state.newEmail} onChangeText = {(newValue) => this.setState({newEmail:newValue})} />
+                                    </Item>
                                 </Form>
-                                <Button block style={{margin: 15}} onPress={() =>
-                                    this.restrictIp()
+                                <Button block style={{margin: 10}} onPress={() =>
+                                    this.changeEmail()
                                 }>
                                     <Text>ЗАПАЗИ</Text>
                                 </Button>

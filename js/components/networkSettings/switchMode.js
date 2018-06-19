@@ -31,8 +31,8 @@ class switchMode extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            disB: false,
-            disA: true,
+            disB: '',
+            disA: '',
             mode: '',
             description:'',
             mac: '',
@@ -50,13 +50,13 @@ class switchMode extends React.Component {
         })
         if(this.state.mode === 1){
             this.setState = ({
-                disA: false,
-                disB: true
+                disA: '#BFCD31',
+                disB: '#b5b5b5'
             })
         }else {
             this.setState = ({
-                disA: true,
-                disB: false
+                disA: '#b5b5b5',
+                disB: '#BFCD31'
             })
         }
         console.log(this.results);
@@ -108,8 +108,8 @@ class switchMode extends React.Component {
 
     changeRouter = () => {
         this.setState = ({
-            disA: false,
-            disB: true
+            disA: '#BFCD31',
+            disB: '#b5b5b5'
         })
         let router = {
             mode: 1
@@ -122,8 +122,8 @@ class switchMode extends React.Component {
     }
     changeBridge = () => {
         this.setState = ({
-            disA: true,
-            disB: false
+            disA: '#b5b5b5',
+            disB: '#BFCD31'
         })
         let bridge = {
             mode: 0
@@ -148,13 +148,13 @@ class switchMode extends React.Component {
                         <Grid>
                             <Row>
                                 <Col>
-                                    <Button block disabled={this.state.disA} onPress={() =>
+                                    <Button block style={{ color: this.state.disA }} onPress={() =>
                                         this.changeRouter()}>
                                         <Text>Router</Text>
                                     </Button>
                                 </Col>
                                 <Col style={{marginLeft: 10}}>
-                                    <Button block disabled={this.state.disB} onPress={() =>
+                                    <Button block style={{ color: this.state.disB }} onPress={() =>
                                         this.changeBridge()}>
                                         <Text>Bridge</Text>
                                     </Button>

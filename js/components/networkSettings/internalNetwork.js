@@ -11,7 +11,7 @@ import {
     CardItem
 } from "native-base";
 
-import { View, Image, } from "react-native";
+import {View, Image, FlatList, Alert} from "react-native";
 
 import {Grid, Row, Col} from "react-native-easy-grid";
 import I18n from "../../../i18n/i18n";
@@ -32,39 +32,64 @@ class InternalNetwork extends React.Component {
         this.state={
             publicPort: '',
             ipAddress: '',
-            privatePort: ''
+            privatePort: '',
+            networkName: '',
+            pass: '',
+            id_: '',
+            active: 1
         }
     }
 
-    changePass = () => {
-        let loginData = {
-            email: this.state.email,
+    componentDidMount () {
+        this.loadData()
+    }
+
+    changeState = (json) => {
+        this.setState({
+            results: json.results,
+            mode: json.results.mode
+        })
+        console.log(this.results);
+        console.log(typeof(this.results));
+    }
+
+    loadData = () => {
+        console.log('load restricted ip')
+        Api.post({
+            url:'port_forward',
+            success: this.changeState
+        })
+    }
+
+    removePortForward = (it) => {
+            let deleteData = {
+                active: 0,
+                id_: it
+            }
+
+            Api.post({
+                url:'port_forward',
+                data: deleteData,
+                success: this.loadData()
+            })
+    }
+    setNetwork = () => {
+        let networkData = {
+            networkName: this.state.networkName,
             pass: this.state.pass,
         }
 
         Api.post({
-            url:'login',
-            data: loginData,
-            success: this.loginSuccess
-        })
-    }
-    changeEmail = () => {
-        let loginData = {
-            email: this.state.email,
-            pass: this.state.pass,
-        }
-
-        Api.post({
-            url:'login',
-            data: loginData,
-            success: this.loginSuccess
+            url:'network_settings',
+            data: networkData,
+            success: this.networkSuccess
         })
     }
 
-    loginSuccess = (response) => {
+    networkSuccess = (response) => {
         if (response.status != 'error')
 
-            Notification.sendToken(()=> this.props.navigation.navigate("MyAccount"));
+            Alert.alert('Вашата домашна мрежа е успешно настроена!');
 
     };
 
@@ -89,24 +114,59 @@ class InternalNetwork extends React.Component {
                                         <Input placeholder='Private Port' ref={component5 => this._textInput5 = component5} value={this.state.privatePort} onChangeText = {(newValue) => this.setState({privatePort:newValue})}/>
                                     </Item>
                                     <Button block style={{margin: 15}} onPress={() =>
-                                        this.restrictIp()
+                                        this.portForward()
                                     }>
                                         <Text>ЗАПАЗИ</Text>
                                     </Button>
+                                    <Row>
+                                        <Col>
+                                            <Text>Public port</Text>
+                                        </Col>
+                                        <Col>
+                                            <Text>IP Address</Text>
+                                        </Col>
+                                        <Col>
+                                            <Text>Private port</Text>
+                                        </Col>
+                                    </Row>
+                                    <FlatList
+                                        data={this.state.results}
+                                        showsVerticalScrollIndicator={false}
+                                        renderItem={({item}) =>
+                                            <Grid>
+                                                <Row>
+                                                    <Col>
+                                                        <Text id={item.public_port} style={{marginTop: 10, width: 140}}>{item.public_port}</Text>
+                                                    </Col>
+                                                    <Col>
+                                                        <Text id={item.ip_address} style={{marginTop: 10, marginLeft: 35, width: 130}}>{item.ip_address}</Text>
+                                                    </Col>
+                                                    <Col>
+                                                        <Text id={item.private_port} style={{marginTop: 10, marginLeft: 35, width: 130}}>{item.private_port}</Text>
+                                                    </Col>
+                                                    <Col>
+                                                        <Button transparent style={{marginLeft: 25}}
+                                                                onPress={() => this.removePortForward(item.id_)}
+                                                        >
+                                                            <Icon name="ios-trash"/>
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+                                            </Grid>
+                                        }
+                                        keyExtractor={item => item.mac}
+                                    />
                                     <Text style={{fontSize: 20, marginBottom: 5, marginLeft: 10,}}>Задайте име на вашата мрежа</Text>
 
                                     <Item style={styles.inputContainer}>
-                                        <Input placeholder="Мрежа" ref={component2 => this._textInput2 = component2} value={this.state.pass2} onChangeText = {(newValue) => this.setState({pass2:newValue})} />
+                                        <Input placeholder="Мрежа" value={this.state.networkName} onChangeText = {(newValue) => this.setState({networkName:newValue})} />
                                     </Item>
                                     <Item style={styles.inputContainer}>
-                                        <Input secureTextEntry={true} placeholder={I18n.t('pass',{locale: 'bg'})} ref={component1 => this._textInput1 = component1} value={this.state.email} onChangeText = {(newValue) => this.setState({email:newValue})} />
-                                    </Item>
-                                    <Item style={styles.inputContainer}>
-                                        <Input secureTextEntry={true} placeholder="Потвърди парола" ref={component => this._textInput = component} value={this.state.newEmail} onChangeText = {(newValue) => this.setState({newEmail:newValue})} />
+                                        <Input secureTextEntry={true} placeholder={I18n.t('pass',{locale: 'bg'})} value={this.state.pass} onChangeText = {(newValue) => this.setState({pass:newValue})} />
                                     </Item>
                                 </Form>
                                 <Button block style={{margin: 10}} onPress={() =>
-                                    this.changeEmail()
+                                    this.setNetwork()
                                 }>
                                     <Text>ЗАПАЗИ</Text>
                                 </Button>

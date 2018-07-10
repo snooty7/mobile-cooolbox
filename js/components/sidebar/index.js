@@ -57,7 +57,7 @@ const datas = [
     },
     {
         name: I18n.t('tv',{locale: 'bg'}),
-        route: "Tv",
+        route: "TvChannels",
         icon: "ios-easel"
     }
 ];

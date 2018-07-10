@@ -73,6 +73,21 @@ class InternalNetwork extends React.Component {
                 success: this.loadData()
             })
     }
+
+    portForward = () => {
+        let portData = {
+            publicPort: this.state.publicPort,
+            privatePort: this.state.privatePort,
+            ipAddress: this.state.ipAddress
+        }
+
+        Api.post({
+            url:'port_forward',
+            data: portData,
+            success: this.networkSuccess
+        })
+    }
+
     setNetwork = () => {
         let networkData = {
             networkName: this.state.networkName,
@@ -113,7 +128,7 @@ class InternalNetwork extends React.Component {
                                     <Item style={styles.inputContainer}>
                                         <Input placeholder='Private Port' ref={component5 => this._textInput5 = component5} value={this.state.privatePort} onChangeText = {(newValue) => this.setState({privatePort:newValue})}/>
                                     </Item>
-                                    <Button block style={{margin: 15}} onPress={() =>
+                                    <Button block style={{margin: 5}} onPress={() =>
                                         this.portForward()
                                     }>
                                         <Text>ЗАПАЗИ</Text>
@@ -136,13 +151,13 @@ class InternalNetwork extends React.Component {
                                             <Grid>
                                                 <Row>
                                                     <Col>
-                                                        <Text id={item.public_port} style={{marginTop: 10, width: 140}}>{item.public_port}</Text>
+                                                        <Text id={item.public_port} style={{width: 70}}>{item.public_port}</Text>
                                                     </Col>
                                                     <Col>
-                                                        <Text id={item.ip_address} style={{marginTop: 10, marginLeft: 35, width: 130}}>{item.ip_address}</Text>
+                                                        <Text id={item.ip_address} style={{marginLeft: 35, width: 130}}>{item.ip_address}</Text>
                                                     </Col>
                                                     <Col>
-                                                        <Text id={item.private_port} style={{marginTop: 10, marginLeft: 35, width: 130}}>{item.private_port}</Text>
+                                                        <Text id={item.private_port} style={{marginLeft: 35, width: 130}}>{item.private_port}</Text>
                                                     </Col>
                                                     <Col>
                                                         <Button transparent style={{marginLeft: 25}}
@@ -154,7 +169,7 @@ class InternalNetwork extends React.Component {
                                                 </Row>
                                             </Grid>
                                         }
-                                        keyExtractor={item => item.mac}
+                                        keyExtractor={(item, index) => index}
                                     />
                                     <Text style={{fontSize: 20, marginBottom: 5, marginLeft: 10,}}>Задайте име на вашата мрежа</Text>
 

@@ -33,9 +33,10 @@ class PushNotification extends React.Component {
 
     static sendToken = (callback) => {
         let loginToken = {
-            token
-        }
+            token: token,
 
+        }
+        console.log(token);
         Api.post({
             url: 'push',
             data: loginToken,
@@ -73,6 +74,7 @@ class PushNotification extends React.Component {
     }
     // Get the token that uniquely identifies this device
      token = await Notifications.getExpoPushTokenAsync();
+    console.log(token);
 
 }
 

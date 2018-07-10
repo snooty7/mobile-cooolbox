@@ -9,7 +9,7 @@ import NetworkSettings from "./components/networkSettings/networkSettings";
 import PhoneCalls from "./components/phoneCalls/phoneCalls";
 import ForgotPass from "./components/home/forgotPass";
 import Registration from "./components/home/registration";
-import Tv from "./components/tv/index";
+import TvChannels from "./components/tv/index";
 import SideBar from "./components/sidebar";
 
 
@@ -21,7 +21,7 @@ const Drawer = DrawerNavigator(
         Additional: {screen: Additional},
         NetworkSettings: {screen: NetworkSettings},
         PhoneCalls: {screen: PhoneCalls},
-        Tv: {screen: Tv},
+        TvChannels: {screen: TvChannels},
         forgotPass: {screen: ForgotPass},
         registration: {screen: Registration}
     },

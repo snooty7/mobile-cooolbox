@@ -12,7 +12,7 @@ import {
     Card,
 } from "native-base";
 
-import {View, Image, TouchableOpacity, Alert, FlatList} from "react-native";
+import {View, Image, TouchableHighlight, Alert, FlatList} from "react-native";
 
 import {Grid, Row, Col} from "react-native-easy-grid";
 import I18n from "../../../i18n/i18n";
@@ -31,10 +31,11 @@ class switchMode extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            disB: '',
-            disA: '',
+            disB: '#BFCD31',
+            disA: '#b5b5b5',
             mode: '',
             description:'',
+            MAC_address: '',
             mac: '',
             active: 1
         }
@@ -46,21 +47,9 @@ class switchMode extends React.Component {
     changeState = (json) => {
         this.setState({
             results: json.results,
-            mode: json.results.mode
+            mode: json.results[0].mode
         })
-        if(this.state.mode === 1){
-            this.setState = ({
-                disA: '#BFCD31',
-                disB: '#b5b5b5'
-            })
-        }else {
-            this.setState = ({
-                disA: '#b5b5b5',
-                disB: '#BFCD31'
-            })
-        }
-        console.log(this.results);
-        console.log(typeof(this.results));
+        console.log(json.results[0].mode);
     }
 
     loadData = () => {
@@ -111,28 +100,11 @@ class switchMode extends React.Component {
             disA: '#BFCD31',
             disB: '#b5b5b5'
         })
-        let router = {
-            mode: 1
-        }
-        Api.post({
-            url:'restrict_ip',
-            data: router,
-            success: this.loadData()
-        })
     }
     changeBridge = () => {
         this.setState = ({
             disA: '#b5b5b5',
             disB: '#BFCD31'
-        })
-        let bridge = {
-            mode: 0
-        }
-
-        Api.post({
-            url:'restrict_ip',
-            data: bridge,
-            success: this.loadData()
         })
     }
 
@@ -148,16 +120,16 @@ class switchMode extends React.Component {
                         <Grid>
                             <Row>
                                 <Col>
-                                    <Button block style={{ color: this.state.disA }} onPress={() =>
+                                    <TouchableHighlight block style={[{ backgroundColor: this.state.disA }]} onPress={() =>
                                         this.changeRouter()}>
                                         <Text>Router</Text>
-                                    </Button>
+                                    </TouchableHighlight>
                                 </Col>
                                 <Col style={{marginLeft: 10}}>
-                                    <Button block style={{ color: this.state.disB }} onPress={() =>
+                                    <TouchableHighlight block style={[{ backgroundColor: this.state.disB }]} onPress={() =>
                                         this.changeBridge()}>
                                         <Text>Bridge</Text>
-                                    </Button>
+                                    </TouchableHighlight>
                                 </Col>
                             </Row>
                             <Row>
@@ -204,7 +176,7 @@ class switchMode extends React.Component {
                                         </Row>
                                     </Grid>
                                 }
-                                keyExtractor={item => item.mac}
+                                keyExtractor={(item, index) => index}
                             />
                         </Grid>
                     </CardItem>

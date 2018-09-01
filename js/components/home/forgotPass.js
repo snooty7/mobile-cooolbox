@@ -1,7 +1,4 @@
 import React, {Component} from "react";
-import I18n from '../../../i18n/i18n';
-import Anchor from './anchor';
-import {View} from "react-native";
 import { WebView, BackHandler } from 'react-native'
 import {
     Container,

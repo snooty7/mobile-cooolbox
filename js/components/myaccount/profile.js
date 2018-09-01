@@ -14,10 +14,7 @@ import {
 } from "native-base";
 
 import { View, Image} from "react-native";
-import ScaledImage from "../../../common/scaledimage";
-
 import styles from './styles';
-
 import {Grid, Row, Col} from "react-native-easy-grid";
 import I18n from "../../../i18n/i18n";
 import Api from "../../../Api";

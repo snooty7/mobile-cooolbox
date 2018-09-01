@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Alert, BackHandler, RefreshControl, ScrollView, View} from "react-native";
 import I18n from '../../../i18n/i18n';
 import Api from '../../../Api';
 import {
@@ -21,9 +20,6 @@ import {
     CardItem
 } from "native-base";
 import {Grid, Row, Col} from "react-native-easy-grid";
-
-import styles from "./styles";
-import Notification from "../push/notification";
 
 class Additional extends Component {
 

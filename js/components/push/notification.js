@@ -1,40 +1,17 @@
 import React, {Component} from "react";
-import I18n from '../../../i18n/i18n';
 import { Permissions, Notifications } from 'expo';
-import {View} from "react-native";
 import {
-    Container,
-    Header,
-    Title,
-    Content,
-    Button,
-    Item,
-    Label,
-    Input,
-    Body,
-    Left,
-    Right,
-    Icon,
-    Form,
-    Text,
-    Toast
+    Container, Header, Title, Content, Button, Item, Label, Input, Body, Left, Right, Icon, Form, Text, Toast
 } from "native-base";
-
-import styles from "./styles";
 import Api from '../../../Api';
-
 let token = '';
-
 class PushNotification extends React.Component {
-
     constructor(props){
         super(props);
     }
-
     static sendToken = (callback) => {
         let loginToken = {
             token: token,
-
         }
         console.log(token);
         Api.post({
@@ -45,7 +22,6 @@ class PushNotification extends React.Component {
         })
         console.log(callback + " error")
     };
-
     componentDidMount() {
         registerForPushNotificationsAsync();
     }
@@ -58,7 +34,6 @@ class PushNotification extends React.Component {
         Permissions.NOTIFICATIONS
     );
     let finalStatus = existingStatus;
-
     // only ask if permissions have not already been determined, because
     // iOS won't necessarily prompt the user a second time.
     if (existingStatus !== 'granted') {
@@ -67,7 +42,6 @@ class PushNotification extends React.Component {
         const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
         finalStatus = status;
     }
-
     // Stop here if the user did not grant permissions
     if (finalStatus !== 'granted') {
         return;
@@ -75,7 +49,5 @@ class PushNotification extends React.Component {
     // Get the token that uniquely identifies this device
      token = await Notifications.getExpoPushTokenAsync();
     console.log(token);
-
 }
-
 export default PushNotification;

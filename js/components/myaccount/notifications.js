@@ -6,14 +6,12 @@ import {
     Content,
     Button,
     Card,
-    CardItem,
+    CardItem, Header, Left, Body, Title, Right, Form, Item, Input,
 
 } from "native-base";
-import {View, Image, Animated, Alert, FlatList} from "react-native";
-import { Notifications } from 'expo';
+import {View, Alert, FlatList} from "react-native";
 import {Grid, Row, Col} from "react-native-easy-grid";
 import I18n from "../../../i18n/i18n";
-import styles from "./styles";
 import Api from "../../../Api";
 
 class ReceiveNotifications extends React.Component {
@@ -24,13 +22,14 @@ class ReceiveNotifications extends React.Component {
     constructor(props){
         super(props);
         this.state={
+            messages: '',
             results: [],
-            active: ''
+            active: 1
         }
     }
 
     componentDidMount () {
-        this.loadDataMessages()
+        this.loadActvieMessages()
     }
 
     changeState = (json) => {
@@ -41,39 +40,36 @@ class ReceiveNotifications extends React.Component {
         console.log(typeof(this.results));
     }
 
-    loadDataMessages = () => {
-        console.log('loadAddedUsers')
+    loadActvieMessages = () => {
+        console.log('loadActvieNotifications')
         Api.post({
             url:'push_messages',
             success: this.changeState
         })
     }
 
-    deleteMessage = (em) => {
+    removeMessage = (it) => {
         let deleteData = {
             active: 0,
-            id_: em
+            id_: it
         }
 
         Api.post({
             url:'push_messages',
             data: deleteData,
-            success: this.loadDataMessages()
+            success: this.loadActvieMessages()
         })
-
-    };
+    }
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container>
                 <Content padder>
                     <Card>
                         <CardItem header>
                             <Grid>
                                 <Row>
-                                    <View>
-                                        <Text style={{marginLeft: 15, fontSize: 20}}>Съобщения от Cooolbox:</Text>
-                                    </View>
+                                    <Text style={{marginLeft: 35, fontSize: 20}}>Съобщения от Cooolbox:</Text>
                                 </Row>
                                 <Row>
                                     <Col>
@@ -85,27 +81,22 @@ class ReceiveNotifications extends React.Component {
                                                     <Row>
                                                         <Col>
                                                             <Text id={item.id_} style={{fontSize: 18, marginLeft: 5,
-                                                                marginTop: 10}}>{item.time}</Text>
-                                                        </Col>
-                                                        <Col>
-                                                            <Text style={{fontSize: 18, marginLeft: 5,
                                                                 marginTop: 10}}>{item.messages}</Text>
                                                         </Col>
                                                         <Col>
                                                             <Button transparent
-                                                                    onPress={() => this.deleteMessage(item.id_)}
+                                                                    onPress={() => this.removeMessage(item.id_)}
                                                             >
-                                                                <Icon name="ios-trash"/>
+                                                                <Icon name="ios-backspace"/>
                                                             </Button>
                                                         </Col>
                                                     </Row>
                                                 </Grid>
                                             }
-                                            keyExtractor={item => item.id_}
+                                            keyExtractor={item => item.messages}
                                         />
                                     </Col>
                                 </Row>
-
                             </Grid>
                         </CardItem>
                     </Card>

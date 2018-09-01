@@ -12,13 +12,12 @@ import {
     Card,
 } from "native-base";
 
-import {View, Image, TouchableHighlight, Alert, FlatList} from "react-native";
+import {View, TouchableOpacity, Alert, FlatList} from "react-native";
 
 import {Grid, Row, Col} from "react-native-easy-grid";
 import I18n from "../../../i18n/i18n";
 import styles from "../home/styles";
 import Api from "../../../Api";
-import Notification from "../push/notification";
 
 class switchMode extends React.Component {
     static navigationOptions = ({ navigation }) => ({
@@ -31,25 +30,27 @@ class switchMode extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            disB: '#BFCD31',
-            disA: '#b5b5b5',
-            mode: '',
             description:'',
             MAC_address: '',
             mac: '',
-            active: 1
+            active: 1,
+            selectedButton: 'Router'
         }
     }
+    //this.selectionOnPress = this.selectionOnPress.bind(this)
     componentDidMount () {
         this.loadData()
     }
+    selectionOnPress(userType) {
 
+        this.setState({ selectedButton: userType })
+    }
     changeState = (json) => {
         this.setState({
-            results: json.results,
-            mode: json.results[0].mode
+            results: json.results
+            //mode: json.results[0].mode
         })
-        console.log(json.results[0].mode);
+        //console.log(json.results[0].mode);
     }
 
     loadData = () => {
@@ -95,41 +96,30 @@ class switchMode extends React.Component {
 
     };
 
-    changeRouter = () => {
-        this.setState = ({
-            disA: '#BFCD31',
-            disB: '#b5b5b5'
-        })
-    }
-    changeBridge = () => {
-        this.setState = ({
-            disA: '#b5b5b5',
-            disB: '#BFCD31'
-        })
-    }
-
     render() {
         return (
             <Content padder>
 
                 <Card>
                     <CardItem header>
-                        <Text style={{marginLeft: 80, fontSize: 30}}>Избор на режим</Text>
+                        <Text style={{marginLeft: 70, fontSize: 30}}>Избор на режим</Text>
                     </CardItem>
                     <CardItem>
                         <Grid>
                             <Row>
                                 <Col>
-                                    <TouchableHighlight block style={[{ backgroundColor: this.state.disA }]} onPress={() =>
-                                        this.changeRouter()}>
-                                        <Text>Router</Text>
-                                    </TouchableHighlight>
+                                    <TouchableOpacity onPress={() => this.selectionOnPress("Router")} >
+                                        <Text style={{paddingLeft: 40, backgroundColor: this.state.selectedButton === "Router" ? '#BFCD31' : '#b5b5b5' }}>
+                                            <Text style={{fontSize: 30, paddingLeft: 10, marginLeft: 30}}>Router</Text>
+                                        </Text>
+                                    </TouchableOpacity>
                                 </Col>
                                 <Col style={{marginLeft: 10}}>
-                                    <TouchableHighlight block style={[{ backgroundColor: this.state.disB }]} onPress={() =>
-                                        this.changeBridge()}>
-                                        <Text>Bridge</Text>
-                                    </TouchableHighlight>
+                                    <TouchableOpacity  onPress={() => this.selectionOnPress("Bridge")} >
+                                        <Text style={{paddingLeft: 40, backgroundColor: this.state.selectedButton === "Bridge" ? '#BFCD31' : '#b5b5b5' }}>
+                                            <Text style={{fontSize: 30}}>Bridge</Text>
+                                        </Text>
+                                    </TouchableOpacity>
                                 </Col>
                             </Row>
                             <Row>

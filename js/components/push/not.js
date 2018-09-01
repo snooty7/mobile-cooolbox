@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {View, Text, TouchableHighlight, Platform} from "react-native";
 import {Constants, Permissions, Notifications} from 'expo';
-import Api from '../../../Api';
 import styles from "./styles";
 import PushNotification from "./notification";
 import GestureView from './gesterview';

@@ -1,27 +1,12 @@
 import React, {Component} from "react";
-import {Alert, RefreshControl, ScrollView} from "react-native";
+import {Alert} from "react-native";
 import I18n from '../../../i18n/i18n';
 import Api from '../../../Api';
 import {
     Container,
     Header,
     Title,
-    Content,
-    Text,
-    H3,
-    Button,
-    Icon,
-    Footer,
-    FooterTab,
-    Left,
-    Right,
-    Card,
-    Body,
-    Form,
-    Item,
-    Input,
-    List,
-    CardItem
+    Content, Text, H3, Button, Icon, Footer, FooterTab, Left, Right, Card, Body, Form, Item, Input, List, CardItem
 } from "native-base";
 import { View, FlatList } from "react-native";
 import {Grid, Row, Col} from "react-native-easy-grid";
@@ -41,12 +26,10 @@ class Payments extends Component {
             payed: 1
         }
     }
-
     componentDidMount () {
         this.loadActvieBankCards()
         this.loadActiveBills()
     }
-
     changeState = (json) => {
         this.setState({
             results: json.results
@@ -54,7 +37,6 @@ class Payments extends Component {
         console.log(this.results);
         console.log(typeof(this.results));
     }
-
     changeStateBills = (json) => {
         this.setState({
             results_: json.results
@@ -62,7 +44,6 @@ class Payments extends Component {
         console.log(this.results);
         console.log(typeof(this.results));
     }
-
     loadActvieBankCards = () => {
         console.log('loadActvieBankCards')
         Api.post({
@@ -70,7 +51,6 @@ class Payments extends Component {
             success: this.changeState
         })
     }
-
     loadActiveBills = () => {
         console.log('loadActvieBills')
         Api.post({
@@ -78,7 +58,6 @@ class Payments extends Component {
             success: this.changeStateBills
         })
     }
-
     addCard = () => {
         let insertData = {
             card_number: this.state.card_number,
@@ -92,46 +71,37 @@ class Payments extends Component {
         })
 
     };
-
     insertSuccess = (response) => {
         if (response.status != 'error')
 
             Alert.alert('Регистрацията премина успешно!');
         this.loadActvieBankCards();
         return true;
-
     };
-
     removeCard = (it) => {
         let deleteData = {
             active: 0,
             id_: it
         }
-
         Api.post({
             url:'bank_cards',
             data: deleteData,
             success: this.loadActvieBankCards()
         })
     }
-
     payBill = (em) => {
         let payData = {
             payed: 0,
             _id_: em
         }
-
         Api.post({
             url:'bills_payments',
             data: payData,
             success: this.loadActiveBills()
         })
-
     };
-
     render() {
         return (
-
             <Container>
                 <Header>
                     <Left>
@@ -146,7 +116,6 @@ class Payments extends Component {
                     <Title>{I18n.t('Payments', {locale: 'bg'})}</Title>
                     </Body>
                     <Right/>
-
                 </Header>
                     <Content padder>
                         <Card>
@@ -238,9 +207,7 @@ class Payments extends Component {
                         </Card>
                     </Content>
             </Container>
-
         );
     }
 }
-
 export default Payments;

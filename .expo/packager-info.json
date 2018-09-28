@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://nt-zjd.snooty7.mobile-cooolbox.exp.direct",
-  "packagerNgrokUrl": "https://packager.nt-zjd.snooty7.mobile-cooolbox.exp.direct",
-  "ngrokPid": 11424,
-  "packagerPort": 19001,
-  "packagerPid": 7020
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "packagerPort": null,
+  "packagerPid": null
 }
